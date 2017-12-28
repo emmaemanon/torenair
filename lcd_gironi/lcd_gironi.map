@@ -8,6 +8,8 @@ c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_tablejump2.o)
                               main.o (__tablejump2__)
 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_copy_data.o)
                               main.o (__do_copy_data)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_clear_bss.o)
+                              lcdpcf8574/lcdpcf8574.o (__do_clear_bss)
 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(strcpy.o)
                               main.o (strcpy)
 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(sprintf.o)
@@ -27,6 +29,11 @@ c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_prologue.o)
 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_epilogue.o)
                               c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(sprintf.o) (__epilogue_restores__)
 
+Allocating common symbols
+Common symbol       size              file
+
+pcf8574_pinstatus   0x8               lcdpcf8574/lcdpcf8574.o
+
 Discarded input sections
 
  .data          0x00000000        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5/crtatmega328p.o
@@ -34,6 +41,12 @@ Discarded input sections
  .text          0x00000000        0x0 main.o
  .data          0x00000000        0x0 main.o
  .bss           0x00000000        0x0 main.o
+ .data          0x00000000        0x0 i2chw/twimaster.o
+ .bss           0x00000000        0x0 i2chw/twimaster.o
+ .data          0x00000000        0x0 lcdpcf8574/lcdpcf8574.o
+ .data          0x00000000        0x0 pcf8574/pcf8574.o
+ .bss           0x00000000        0x0 pcf8574/pcf8574.o
+ .data          0x00000000        0x0 uart/uart.o
  .text          0x00000000        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_udivmodqi4.o)
  .data          0x00000000        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_udivmodqi4.o)
  .bss           0x00000000        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_udivmodqi4.o)
@@ -95,6 +108,22 @@ Discarded input sections
                 0x00000000        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_copy_data.o)
  .text.libgcc.fixed
                 0x00000000        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_copy_data.o)
+ .text          0x00000000        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_clear_bss.o)
+ .data          0x00000000        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_clear_bss.o)
+ .bss           0x00000000        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_clear_bss.o)
+ .text.libgcc.mul
+                0x00000000        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_clear_bss.o)
+ .text.libgcc.div
+                0x00000000        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_clear_bss.o)
+ .text.libgcc   0x00000000        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_clear_bss.o)
+ .text.libgcc.prologue
+                0x00000000        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_clear_bss.o)
+ .text.libgcc.builtins
+                0x00000000        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_clear_bss.o)
+ .text.libgcc.fmul
+                0x00000000        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_clear_bss.o)
+ .text.libgcc.fixed
+                0x00000000        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_clear_bss.o)
  .text          0x00000000        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(strcpy.o)
  .data          0x00000000        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(strcpy.o)
  .bss           0x00000000        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(strcpy.o)
@@ -162,6 +191,10 @@ Linker script and memory map
 Address of section .data set to 0x800100
 LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5/crtatmega328p.o
 LOAD main.o
+LOAD i2chw/twimaster.o
+LOAD lcdpcf8574/lcdpcf8574.o
+LOAD pcf8574/pcf8574.o
+LOAD uart/uart.o
 START GROUP
 LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a
 LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libm.a
@@ -266,7 +299,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x866
+.text           0x00000000      0xfe8
  *(.vectors)
  .vectors       0x00000000       0x68 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5/crtatmega328p.o
                 0x00000000                __vector_default
@@ -311,6 +344,8 @@ END GROUP
  *(.init4)
  .init4         0x0000008c       0x16 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_copy_data.o)
                 0x0000008c                __do_copy_data
+ .init4         0x000000a2       0x10 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_clear_bss.o)
+                0x000000a2                __do_clear_bss
  *(.init4)
  *(.init5)
  *(.init5)
@@ -321,81 +356,119 @@ END GROUP
  *(.init8)
  *(.init8)
  *(.init9)
- .init9         0x000000a2        0x8 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5/crtatmega328p.o
+ .init9         0x000000b2        0x8 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5/crtatmega328p.o
  *(.init9)
  *(.text)
- .text          0x000000aa        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5/crtatmega328p.o
-                0x000000aa                __vector_22
-                0x000000aa                __vector_1
-                0x000000aa                __vector_24
-                0x000000aa                __vector_12
-                0x000000aa                __bad_interrupt
-                0x000000aa                __vector_6
-                0x000000aa                __vector_3
-                0x000000aa                __vector_23
-                0x000000aa                __vector_25
-                0x000000aa                __vector_11
-                0x000000aa                __vector_13
-                0x000000aa                __vector_17
-                0x000000aa                __vector_19
-                0x000000aa                __vector_7
-                0x000000aa                __vector_5
-                0x000000aa                __vector_4
-                0x000000aa                __vector_9
-                0x000000aa                __vector_2
-                0x000000aa                __vector_21
-                0x000000aa                __vector_15
-                0x000000aa                __vector_8
-                0x000000aa                __vector_14
-                0x000000aa                __vector_10
-                0x000000aa                __vector_16
-                0x000000aa                __vector_18
-                0x000000aa                __vector_20
-                0x000000ae                . = ALIGN (0x2)
+ .text          0x000000ba        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5/crtatmega328p.o
+                0x000000ba                __vector_22
+                0x000000ba                __vector_1
+                0x000000ba                __vector_24
+                0x000000ba                __vector_12
+                0x000000ba                __bad_interrupt
+                0x000000ba                __vector_6
+                0x000000ba                __vector_3
+                0x000000ba                __vector_23
+                0x000000ba                __vector_25
+                0x000000ba                __vector_11
+                0x000000ba                __vector_13
+                0x000000ba                __vector_17
+                0x000000ba                __vector_7
+                0x000000ba                __vector_5
+                0x000000ba                __vector_4
+                0x000000ba                __vector_9
+                0x000000ba                __vector_2
+                0x000000ba                __vector_21
+                0x000000ba                __vector_15
+                0x000000ba                __vector_8
+                0x000000ba                __vector_14
+                0x000000ba                __vector_10
+                0x000000ba                __vector_16
+                0x000000ba                __vector_20
+ .text          0x000000be       0xfc i2chw/twimaster.o
+                0x000000be                i2c_init
+                0x000000ca                i2c_start
+                0x0000010e                i2c_start_wait
+                0x0000015c                i2c_rep_start
+                0x00000160                i2c_stop
+                0x00000170                i2c_write
+                0x00000192                i2c_readAck
+                0x000001a6                i2c_readNak
+ .text          0x000001ba      0x32c lcdpcf8574/lcdpcf8574.o
+                0x00000380                lcd_command
+                0x00000392                lcd_data
+                0x000003a4                lcd_gotoxy
+                0x000003b2                lcd_getxy
+                0x000003ba                lcd_clrscr
+                0x000003c0                lcd_led
+                0x000003e0                lcd_home
+                0x000003e6                lcd_putc
+                0x0000040e                lcd_puts
+                0x00000426                lcd_puts_p
+                0x00000444                lcd_init
+ .text          0x000004e6      0x1d8 pcf8574/pcf8574.o
+                0x000004e6                pcf8574_init
+                0x00000508                pcf8574_getoutput
+                0x0000051c                pcf8574_getoutputpin
+                0x00000546                pcf8574_setoutput
+                0x00000578                pcf8574_setoutputpins
+                0x000005fc                pcf8574_setoutputpin
+                0x0000064e                pcf8574_setoutputpinhigh
+                0x00000654                pcf8574_setoutputpinlow
+                0x0000065a                pcf8574_getinput
+                0x00000690                pcf8574_getinputpin
+ .text          0x000006be      0x172 uart/uart.o
+                0x000006be                __vector_18
+                0x00000714                __vector_19
+                0x00000768                uart_init
+                0x0000079a                uart_getc
+                0x000007d0                uart_putc
+                0x000007fa                uart_puts
+                0x00000812                uart_puts_p
+                0x00000830                . = ALIGN (0x2)
  *(.text.*)
  .text.display_main
-                0x000000ae      0x17c main.o
-                0x000000ae                display_main
+                0x00000830      0x17c main.o
+                0x00000830                display_main
  .text.startup.main
-                0x0000022a       0x56 main.o
-                0x0000022a                main
+                0x000009ac       0x56 main.o
+                0x000009ac                main
  .text.libgcc.div
-                0x00000280       0x18 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_udivmodqi4.o)
-                0x00000280                __udivmodqi4
- .text.libgcc   0x00000298        0xc c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_tablejump2.o)
-                0x00000298                __tablejump2__
+                0x00000a02       0x18 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_udivmodqi4.o)
+                0x00000a02                __udivmodqi4
+ .text.libgcc   0x00000a1a        0xc c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_tablejump2.o)
+                0x00000a1a                __tablejump2__
  .text.avr-libc
-                0x000002a4        0xe c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(strcpy.o)
-                0x000002a4                strcpy
+                0x00000a26        0xe c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(strcpy.o)
+                0x00000a26                strcpy
  .text.avr-libc
-                0x000002b2       0x46 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(sprintf.o)
-                0x000002b2                sprintf
+                0x00000a34       0x46 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(sprintf.o)
+                0x00000a34                sprintf
  .text.avr-libc
-                0x000002f8      0x3a4 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
-                0x000002f8                vfprintf
+                0x00000a7a      0x3a4 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
+                0x00000a7a                vfprintf
  .text.avr-libc
-                0x0000069c       0x16 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
-                0x0000069c                strnlen_P
+                0x00000e1e       0x16 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
+                0x00000e1e                strnlen_P
  .text.avr-libc
-                0x000006b2       0x16 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(strnlen.o)
-                0x000006b2                strnlen
+                0x00000e34       0x16 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(strnlen.o)
+                0x00000e34                strnlen
  .text.avr-libc
-                0x000006c8       0x70 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(fputc.o)
-                0x000006c8                fputc
+                0x00000e4a       0x70 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(fputc.o)
+                0x00000e4a                fputc
  .text.avr-libc
-                0x00000738       0xbc c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
-                0x00000738                __ultoa_invert
+                0x00000eba       0xbc c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
+                0x00000eba                __ultoa_invert
  .text.libgcc.prologue
-                0x000007f4       0x38 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_prologue.o)
-                0x000007f4                __prologue_saves__
+                0x00000f76       0x38 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_prologue.o)
+                0x00000f76                __prologue_saves__
  .text.libgcc.prologue
-                0x0000082c       0x36 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_epilogue.o)
-                0x0000082c                __epilogue_restores__
-                0x00000862                . = ALIGN (0x2)
+                0x00000fae       0x36 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_epilogue.o)
+                0x00000fae                __epilogue_restores__
+                0x00000fe4                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000862        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
-                0x00000862                _exit
-                0x00000862                exit
+ .fini9         0x00000fe4        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
+                0x00000fe4                _exit
+                0x00000fe4                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -414,11 +487,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000862        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
+ .fini0         0x00000fe4        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000866                _etext = .
+                0x00000fe8                _etext = .
 
-.data           0x00800100       0x78 load address 0x00000866
+.data           0x00800100       0x78 load address 0x00000fe8
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -433,20 +506,25 @@ END GROUP
                 0x00800178                _edata = .
                 0x00800178                PROVIDE (__data_end, .)
 
-.bss            0x00800178        0x0
-                [!provide]                PROVIDE (__bss_start, .)
+.bss            0x00800178       0x4e
+                0x00800178                PROVIDE (__bss_start, .)
  *(.bss)
+ .bss           0x00800178        0x1 lcdpcf8574/lcdpcf8574.o
+                0x00800178                dataport
+ .bss           0x00800179       0x45 uart/uart.o
  *(.bss*)
  *(COMMON)
-                [!provide]                PROVIDE (__bss_end, .)
-                0x00000866                __data_load_start = LOADADDR (.data)
-                0x000008de                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x008001be        0x8 lcdpcf8574/lcdpcf8574.o
+                0x008001be                pcf8574_pinstatus
+                0x008001c6                PROVIDE (__bss_end, .)
+                0x00000fe8                __data_load_start = LOADADDR (.data)
+                0x00001060                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800178        0x0
+.noinit         0x008001c6        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x00800178                _end = .
+                0x008001c6                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -490,6 +568,10 @@ END GROUP
  *(.comment)
  .comment       0x00000000       0x30 main.o
                                  0x31 (size before relaxing)
+ .comment       0x00000030       0x31 i2chw/twimaster.o
+ .comment       0x00000030       0x31 lcdpcf8574/lcdpcf8574.o
+ .comment       0x00000030       0x31 pcf8574/pcf8574.o
+ .comment       0x00000030       0x31 uart/uart.o
  .comment       0x00000030       0x31 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(sprintf.o)
  .comment       0x00000030       0x2c c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
                                  0x2d (size before relaxing)
@@ -515,42 +597,78 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000       0x28
+.debug_aranges  0x00000000       0xa8
  *(.debug_aranges)
  .debug_aranges
                 0x00000000       0x28 main.o
+ .debug_aranges
+                0x00000028       0x20 i2chw/twimaster.o
+ .debug_aranges
+                0x00000048       0x20 lcdpcf8574/lcdpcf8574.o
+ .debug_aranges
+                0x00000068       0x20 pcf8574/pcf8574.o
+ .debug_aranges
+                0x00000088       0x20 uart/uart.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000      0xae4
+.debug_info     0x00000000     0x1d20
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x5f4 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5/crtatmega328p.o
  .debug_info    0x000005f4      0x4f0 main.o
+ .debug_info    0x00000ae4      0x1f3 i2chw/twimaster.o
+ .debug_info    0x00000cd7      0x801 lcdpcf8574/lcdpcf8574.o
+ .debug_info    0x000014d8      0x554 pcf8574/pcf8574.o
+ .debug_info    0x00001a2c      0x2f4 uart/uart.o
 
-.debug_abbrev   0x00000000      0x77d
+.debug_abbrev   0x00000000      0xecd
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x5a2 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5/crtatmega328p.o
  .debug_abbrev  0x000005a2      0x1db main.o
+ .debug_abbrev  0x0000077d      0x14b i2chw/twimaster.o
+ .debug_abbrev  0x000008c8      0x2dd lcdpcf8574/lcdpcf8574.o
+ .debug_abbrev  0x00000ba5      0x1ee pcf8574/pcf8574.o
+ .debug_abbrev  0x00000d93      0x13a uart/uart.o
 
-.debug_line     0x00000000      0x216
+.debug_line     0x00000000      0xc89
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000       0x1a c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5/crtatmega328p.o
  .debug_line    0x0000001a      0x1fc main.o
+ .debug_line    0x00000216      0x1ec i2chw/twimaster.o
+ .debug_line    0x00000402      0x408 lcdpcf8574/lcdpcf8574.o
+ .debug_line    0x0000080a      0x2e4 pcf8574/pcf8574.o
+ .debug_line    0x00000aee      0x19b uart/uart.o
 
-.debug_frame    0x00000000       0x68
+.debug_frame    0x00000000      0x42c
  *(.debug_frame)
  .debug_frame   0x00000000       0x68 main.o
+ .debug_frame   0x00000068       0x94 i2chw/twimaster.o
+ .debug_frame   0x000000fc      0x158 lcdpcf8574/lcdpcf8574.o
+ .debug_frame   0x00000254       0xec pcf8574/pcf8574.o
+ .debug_frame   0x00000340       0xec uart/uart.o
 
-.debug_str      0x00000000      0x425
+.debug_str      0x00000000      0x829
  *(.debug_str)
  .debug_str     0x00000000      0x208 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5/crtatmega328p.o
- .debug_str     0x00000208      0x21d main.o
+ .debug_str     0x00000208      0x212 main.o
                                 0x25b (size before relaxing)
+ .debug_str     0x0000041a      0x144 i2chw/twimaster.o
+                                0x1b8 (size before relaxing)
+ .debug_str     0x0000055e      0x167 lcdpcf8574/lcdpcf8574.o
+                                0x2e8 (size before relaxing)
+ .debug_str     0x000006c5       0xa4 pcf8574/pcf8574.o
+                                0x2d7 (size before relaxing)
+ .debug_str     0x00000769       0xc0 uart/uart.o
+                                0x245 (size before relaxing)
 
-.debug_loc      0x00000000      0x249
+.debug_loc      0x00000000     0x120f
  *(.debug_loc)
  .debug_loc     0x00000000      0x249 main.o
+ .debug_loc     0x00000249      0x120 i2chw/twimaster.o
+ .debug_loc     0x00000369      0x53c lcdpcf8574/lcdpcf8574.o
+ .debug_loc     0x000008a5      0x63d pcf8574/pcf8574.o
+ .debug_loc     0x00000ee2      0x32d uart/uart.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -570,9 +688,10 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000       0x18
+.debug_ranges   0x00000000       0x30
  *(.debug_ranges)
  .debug_ranges  0x00000000       0x18 main.o
+ .debug_ranges  0x00000018       0x18 lcdpcf8574/lcdpcf8574.o
 
 .debug_macro
  *(.debug_macro)
