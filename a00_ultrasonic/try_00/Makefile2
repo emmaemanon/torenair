@@ -54,6 +54,7 @@ TARGET = $(lastword $(subst /, ,$(CURDIR)))
 #  you can add them in to SOURCES below in the wildcard statement.
 SOURCES=$(wildcard *.c $(LIBDIR)/*.c) \
        $(wildcard i2chw/*.c) \
+       $(wildcard Keypad/*.c) \
        $(wildcard lcdpcf8574/*.c) \
        $(wildcard pcf8574/*.c) \
        $(wildcard uart/*.c)
@@ -120,7 +121,9 @@ clean:
 	rm -f $(TARGET).elf $(TARGET).hex $(TARGET).obj \
 	$(TARGET).o $(TARGET).d $(TARGET).eep $(TARGET).lst \
 	$(TARGET).lss $(TARGET).sym $(TARGET).map $(TARGET)~ \
-	$(TARGET).eeprom
+	$(TARGET).eeprom 
+
+# $(OBJECTS)
 
 squeaky_clean:
 	rm -f $(SOURCES:.c=.elf) $(SOURCES:.c=.hex) $(SOURCES:.c=.obj) $(SOURCES:.c=.o) *.d *.eep *.lst *.lss *.sym *.map *~ *.eeprom
