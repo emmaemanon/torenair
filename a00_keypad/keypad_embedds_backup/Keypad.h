@@ -31,10 +31,10 @@
 #define PIN_C3	PIND
 #define PIN_C4	PIND
 
-#define PD_R1	PB3
-#define PD_R2	PB2
-#define PD_R3	PB1
-#define PD_R4	PB0
+#define PD_R1	PD3
+#define PD_R2	PD2
+#define PD_R3	PD1
+#define PD_R4	PD0
 #define PD_C1	PD7
 #define PD_C2	PD6
 #define PD_C3	PD5

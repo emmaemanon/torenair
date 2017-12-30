@@ -12,6 +12,33 @@
 
 #include "Keypad.h"
 
+//#define KEYPAD_PIN_ROW ((PIN_R1 << 3) | (PIN_R2 << 2) | (PIN_R3 << 1) | (PIN_R4))
+//#define KEYPAD_PIN_COL ((PIN_C1 << 3) | (PIN_C2 << 2) | (PIN_C3 << 1) | (PIN_C4))
+
+void DDRRow(uint8_t byteValue)
+{
+	if((byteValue >> 3) & 1){
+		DDR_R1 |= (1 << PD_R1);
+	} else {
+		DDR_R1 &= ~(1 << PD_R1);
+	}
+	if((byteValue >> 2) & 1){
+		DDR_R2 |= (1 << PD_R2);
+	} else {
+		DDR_R2 &= ~(1 << PD_R2);
+	}
+	if((byteValue >> 1) & 1){
+		DDR_R3 |= (1 << PD_R3);
+	} else {
+		DDR_R3 &= ~(1 << PD_R3);
+	}
+	if((byteValue >> 0) & 1){
+		DDR_R4 |= (1 << PD_R4);
+	} else {
+		DDR_R4 &= ~(1 << PD_R4);
+	}
+}
+
 void DDRCol(uint8_t byteValue)
 {
 	if((byteValue >> 3) & 1){
@@ -64,6 +91,9 @@ uint8_t GetKeyPressed()
 {
 	uint8_t r, c;
 	
+	//PortRow(0x0F);
+	//PortCol(0x00);
+	
 	DDR_R1 &= ~(1 << PD_R1);
 	DDR_R2 &= ~(1 << PD_R2);
 	DDR_R3 &= ~(1 << PD_R3);
@@ -72,44 +102,36 @@ uint8_t GetKeyPressed()
 	PORT_R2 |= (1 << PD_R2);
 	PORT_R3 |= (1 << PD_R3);
 	PORT_R4 |= (1 << PD_R4);
+	//PORT_C1 |= ((1 << PIN_C1);
+	//PORT_C2 |= ((1 << PIN_C2);
+	//PORT_C3 |= ((1 << PIN_C3);
+	//PORT_C4 |= ((1 << PIN_C4);
 	
-	for(c = 0; c < 4; c++)
+	for(c=0; c<4; c++)
 	{
+		//DDRCol(0x00);
 		DDRCol(0b00001000 >> c);
 		PORTCol(0b11110111 >> c);
-		for(r = 0; r < 4; r++)
+		for(r=0; r<4; r++)
 		{
 			if (bit_is_clear(PIN_R1, PD_R1)) {
-				_delay_us(1000);
-				if (bit_is_clear(PIN_R1, PD_R1)) {
-					return (c + 1);
-				}
-				return (0);
+				return (0);//r*4 + c);
 			}
 			if (bit_is_clear(PIN_R2, PD_R2)) {
-				_delay_us(1000);
-				if (bit_is_clear(PIN_R2, PD_R2)) {
-					return (c + 5);
-				}
-				return (0);
+				return (1);//r*4 + c);
 			}
-			if (bit_is_clear(PIN_R3, PD_R3)) {
-				_delay_us(1000);
-				if (bit_is_clear(PIN_R3, PD_R3)) {
-					return (c + 9);
-				}
-				return (0);
-			}
-			if (bit_is_clear(PIN_R4, PD_R4)) {
-				_delay_us(1000);
-				if (bit_is_clear(PIN_R4, PD_R4)) {
-					return (c + 13);
-				}
-				return (0);
-			}
+			//if(!(KEYPAD_PIN_ROW & (0X08 >> r)))
+			//{
+			//	return (KEYPAD_PIN_ROW);//r*4 + c);
+			//}
+			//_delay_ms(1000);
 		}
+		//DDRCol(0x08 >> c);
+		//PORTCol(~(0x08 >> c));
+		//DDRCol(0x08 >> c);
+		//_delay_ms(10);
 	}
-	return (0); //Indicate No keypressed
+	return 0XFF;//Indicate No keypressed
 }
 
 int main()
@@ -127,7 +149,7 @@ int main()
 		sprintf(buf, "asdf: %d", key);
 		uart_puts(buf);
 		uart_puts("\r\n");
-		//_delay_ms(200);
+		_delay_ms(200);
 	}
 	return(0);
 }

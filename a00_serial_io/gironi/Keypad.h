@@ -22,22 +22,13 @@
 #define DDR_C3	DDRD
 #define DDR_C4	DDRD
 
-#define PIN_R1	PINB
-#define PIN_R2	PINB
-#define PIN_R3	PINB
-#define PIN_R4	PINB
-#define PIN_C1	PIND
-#define PIN_C2	PIND
-#define PIN_C3	PIND
-#define PIN_C4	PIND
-
-#define PD_R1	PB3
-#define PD_R2	PB2
-#define PD_R3	PB1
-#define PD_R4	PB0
-#define PD_C1	PD7
-#define PD_C2	PD6
-#define PD_C3	PD5
-#define PD_C4	PD4
+#define PIN_R1	PIN3
+#define PIN_R2	PIN2
+#define PIN_R3	PIN1
+#define PIN_R4	PIN0
+#define PIN_C1	PIN7
+#define PIN_C2	PIN6
+#define PIN_C3	PIN5
+#define PIN_C4	PIN4
 
 #endif

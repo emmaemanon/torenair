@@ -19,7 +19,7 @@ Please refer to LICENSE file for licensing information.
 #include "lcdpcf8574/lcdpcf8574.h"
 
 #define UART_BAUD_RATE 9600
-//#define F_CPU 16000000
+#define F_CPU 16000000
 #include "uart/uart.h"
 
 void display_main(uint8_t month, uint8_t day, uint8_t hour, uint8_t minute, uint8_t second, uint8_t rate, uint8_t height, uint8_t relay);
@@ -35,11 +35,11 @@ int main(void)
     sei();
 
     //init lcd
-    lcd_init(LCD_DISP_ON);
-    lcd_led(0); //set led
+    //lcd_init(LCD_DISP_ON);
+    //lcd_led(0); //set led
 
     //lcd go home
-    lcd_home();
+    //lcd_home();
 	
 	uint8_t count = 0;
 	
@@ -58,7 +58,7 @@ int main(void)
 		
 		display_main(month, day, hour, minute, second, rate, height, relay);
 		
-		_delay_ms(500);
+		_delay_ms(1000);
 		count++;
     }
 }
