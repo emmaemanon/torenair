@@ -331,7 +331,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0xff6
+.text           0x00000000      0xfe8
  *(.vectors)
  .vectors       0x00000000       0x68 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5/crtatmega328p.o
                 0x00000000                __vector_default
@@ -424,121 +424,121 @@ END GROUP
                 0x00000292      0x17c main.o
                 0x00000292                display_main
  .text.startup.main
-                0x0000040e       0x82 main.o
+                0x0000040e       0x74 main.o
                 0x0000040e                main
  .text.i2c_init
-                0x00000490        0xc i2chw/twimaster.o
-                0x00000490                i2c_init
+                0x00000482        0xc i2chw/twimaster.o
+                0x00000482                i2c_init
  .text.i2c_start
-                0x0000049c       0x44 i2chw/twimaster.o
-                0x0000049c                i2c_start
+                0x0000048e       0x44 i2chw/twimaster.o
+                0x0000048e                i2c_start
  .text.i2c_stop
-                0x000004e0       0x10 i2chw/twimaster.o
-                0x000004e0                i2c_stop
+                0x000004d2       0x10 i2chw/twimaster.o
+                0x000004d2                i2c_stop
  .text.i2c_write
-                0x000004f0       0x22 i2chw/twimaster.o
-                0x000004f0                i2c_write
+                0x000004e2       0x22 i2chw/twimaster.o
+                0x000004e2                i2c_write
  .text.toggle_e
-                0x00000512       0x12 lcdpcf8574/lcdpcf8574.o
+                0x00000504       0x12 lcdpcf8574/lcdpcf8574.o
  .text.lcd_write
-                0x00000524      0x13a lcdpcf8574/lcdpcf8574.o
+                0x00000516      0x13a lcdpcf8574/lcdpcf8574.o
  .text.lcd_read.constprop.0
-                0x0000065e       0x66 lcdpcf8574/lcdpcf8574.o
+                0x00000650       0x66 lcdpcf8574/lcdpcf8574.o
  .text.lcd_waitbusy
-                0x000006c4       0x14 lcdpcf8574/lcdpcf8574.o
+                0x000006b6       0x14 lcdpcf8574/lcdpcf8574.o
  .text.lcd_command
-                0x000006d8       0x12 lcdpcf8574/lcdpcf8574.o
-                0x000006d8                lcd_command
+                0x000006ca       0x12 lcdpcf8574/lcdpcf8574.o
+                0x000006ca                lcd_command
  .text.lcd_gotoxy
-                0x000006ea        0xe lcdpcf8574/lcdpcf8574.o
-                0x000006ea                lcd_gotoxy
+                0x000006dc        0xe lcdpcf8574/lcdpcf8574.o
+                0x000006dc                lcd_gotoxy
  .text.lcd_clrscr
-                0x000006f8        0x6 lcdpcf8574/lcdpcf8574.o
-                0x000006f8                lcd_clrscr
- .text.lcd_led  0x000006fe       0x20 lcdpcf8574/lcdpcf8574.o
-                0x000006fe                lcd_led
+                0x000006ea        0x6 lcdpcf8574/lcdpcf8574.o
+                0x000006ea                lcd_clrscr
+ .text.lcd_led  0x000006f0       0x20 lcdpcf8574/lcdpcf8574.o
+                0x000006f0                lcd_led
  .text.lcd_home
-                0x0000071e        0x6 lcdpcf8574/lcdpcf8574.o
-                0x0000071e                lcd_home
+                0x00000710        0x6 lcdpcf8574/lcdpcf8574.o
+                0x00000710                lcd_home
  .text.lcd_putc
-                0x00000724       0x28 lcdpcf8574/lcdpcf8574.o
-                0x00000724                lcd_putc
+                0x00000716       0x28 lcdpcf8574/lcdpcf8574.o
+                0x00000716                lcd_putc
  .text.lcd_puts
-                0x0000074c       0x18 lcdpcf8574/lcdpcf8574.o
-                0x0000074c                lcd_puts
+                0x0000073e       0x18 lcdpcf8574/lcdpcf8574.o
+                0x0000073e                lcd_puts
  .text.lcd_init
-                0x00000764       0xa2 lcdpcf8574/lcdpcf8574.o
-                0x00000764                lcd_init
+                0x00000756       0xa2 lcdpcf8574/lcdpcf8574.o
+                0x00000756                lcd_init
  .text.pcf8574_init
-                0x00000806       0x22 pcf8574/pcf8574.o
-                0x00000806                pcf8574_init
+                0x000007f8       0x22 pcf8574/pcf8574.o
+                0x000007f8                pcf8574_init
  .text.pcf8574_getoutputpin
-                0x00000828       0x2a pcf8574/pcf8574.o
-                0x00000828                pcf8574_getoutputpin
+                0x0000081a       0x2a pcf8574/pcf8574.o
+                0x0000081a                pcf8574_getoutputpin
  .text.pcf8574_setoutput
-                0x00000852       0x32 pcf8574/pcf8574.o
-                0x00000852                pcf8574_setoutput
+                0x00000844       0x32 pcf8574/pcf8574.o
+                0x00000844                pcf8574_setoutput
  .text.pcf8574_setoutputpin
-                0x00000884       0x52 pcf8574/pcf8574.o
-                0x00000884                pcf8574_setoutputpin
+                0x00000876       0x52 pcf8574/pcf8574.o
+                0x00000876                pcf8574_setoutputpin
  .text.pcf8574_setoutputpinhigh
-                0x000008d6        0x6 pcf8574/pcf8574.o
-                0x000008d6                pcf8574_setoutputpinhigh
+                0x000008c8        0x6 pcf8574/pcf8574.o
+                0x000008c8                pcf8574_setoutputpinhigh
  .text.pcf8574_setoutputpinlow
-                0x000008dc        0x6 pcf8574/pcf8574.o
-                0x000008dc                pcf8574_setoutputpinlow
+                0x000008ce        0x6 pcf8574/pcf8574.o
+                0x000008ce                pcf8574_setoutputpinlow
  .text.__vector_18
-                0x000008e2       0x56 uart/uart.o
-                0x000008e2                __vector_18
+                0x000008d4       0x56 uart/uart.o
+                0x000008d4                __vector_18
  .text.__vector_19
-                0x00000938       0x54 uart/uart.o
-                0x00000938                __vector_19
+                0x0000092a       0x54 uart/uart.o
+                0x0000092a                __vector_19
  .text.uart_init
-                0x0000098c       0x32 uart/uart.o
-                0x0000098c                uart_init
+                0x0000097e       0x32 uart/uart.o
+                0x0000097e                uart_init
  .text.uart_putc
-                0x000009be       0x2a uart/uart.o
-                0x000009be                uart_putc
+                0x000009b0       0x2a uart/uart.o
+                0x000009b0                uart_putc
  .text.uart_puts
-                0x000009e8       0x18 uart/uart.o
-                0x000009e8                uart_puts
+                0x000009da       0x18 uart/uart.o
+                0x000009da                uart_puts
  .text.libgcc.div
-                0x00000a00       0x28 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_udivmodhi4.o)
-                0x00000a00                __udivmodhi4
- .text.libgcc   0x00000a28        0xc c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_tablejump2.o)
-                0x00000a28                __tablejump2__
+                0x000009f2       0x28 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_udivmodhi4.o)
+                0x000009f2                __udivmodhi4
+ .text.libgcc   0x00000a1a        0xc c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_tablejump2.o)
+                0x00000a1a                __tablejump2__
  .text.avr-libc
-                0x00000a34        0xe c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(strcpy.o)
-                0x00000a34                strcpy
+                0x00000a26        0xe c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(strcpy.o)
+                0x00000a26                strcpy
  .text.avr-libc
-                0x00000a42       0x46 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(sprintf.o)
-                0x00000a42                sprintf
+                0x00000a34       0x46 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(sprintf.o)
+                0x00000a34                sprintf
  .text.avr-libc
-                0x00000a88      0x3a4 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
-                0x00000a88                vfprintf
+                0x00000a7a      0x3a4 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
+                0x00000a7a                vfprintf
  .text.avr-libc
-                0x00000e2c       0x16 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
-                0x00000e2c                strnlen_P
+                0x00000e1e       0x16 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
+                0x00000e1e                strnlen_P
  .text.avr-libc
-                0x00000e42       0x16 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(strnlen.o)
-                0x00000e42                strnlen
+                0x00000e34       0x16 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(strnlen.o)
+                0x00000e34                strnlen
  .text.avr-libc
-                0x00000e58       0x70 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(fputc.o)
-                0x00000e58                fputc
+                0x00000e4a       0x70 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(fputc.o)
+                0x00000e4a                fputc
  .text.avr-libc
-                0x00000ec8       0xbc c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
-                0x00000ec8                __ultoa_invert
+                0x00000eba       0xbc c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
+                0x00000eba                __ultoa_invert
  .text.libgcc.prologue
-                0x00000f84       0x38 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_prologue.o)
-                0x00000f84                __prologue_saves__
+                0x00000f76       0x38 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_prologue.o)
+                0x00000f76                __prologue_saves__
  .text.libgcc.prologue
-                0x00000fbc       0x36 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_epilogue.o)
-                0x00000fbc                __epilogue_restores__
-                0x00000ff2                . = ALIGN (0x2)
+                0x00000fae       0x36 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_epilogue.o)
+                0x00000fae                __epilogue_restores__
+                0x00000fe4                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000ff2        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
-                0x00000ff2                _exit
-                0x00000ff2                exit
+ .fini9         0x00000fe4        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
+                0x00000fe4                _exit
+                0x00000fe4                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -557,74 +557,75 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000ff2        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
+ .fini0         0x00000fe4        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000ff6                _etext = .
+                0x00000fe8                _etext = .
 
-.data           0x00800100       0x7e load address 0x00000ff6
+.data           0x00800100       0x7c load address 0x00000fe8
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
- .data.second   0x00800100        0x1 main.o
-                0x00800100                second
- .data.minute   0x00800101        0x1 main.o
-                0x00800101                minute
- .data.hour     0x00800102        0x1 main.o
-                0x00800102                hour
- .data.day      0x00800103        0x1 main.o
-                0x00800103                day
- .data.month    0x00800104        0x1 main.o
-                0x00800104                month
- .data.year     0x00800105        0x2 main.o
-                0x00800105                year
+ .data.day      0x00800100        0x1 main.o
+                0x00800100                day
+ .data.month    0x00800101        0x1 main.o
+                0x00800101                month
+ .data.year     0x00800102        0x2 main.o
+                0x00800102                year
  *(.rodata)
- .rodata        0x00800107       0x4b main.o
+ .rodata        0x00800104       0x4b main.o
  *(.rodata*)
  .rodata.str1.1
-                0x00800152       0x2c main.o
+                0x0080014f       0x2c main.o
  *(.gnu.linkonce.d*)
-                0x0080017e                . = ALIGN (0x2)
-                0x0080017e                _edata = .
-                0x0080017e                PROVIDE (__data_end, .)
+                0x0080017c                . = ALIGN (0x2)
+ *fill*         0x0080017b        0x1 
+                0x0080017c                _edata = .
+                0x0080017c                PROVIDE (__data_end, .)
 
-.bss            0x0080017e       0x51
-                0x0080017e                PROVIDE (__bss_start, .)
+.bss            0x0080017c       0x54
+                0x0080017c                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
- .bss.relay     0x0080017e        0x1 main.o
-                0x0080017e                relay
- .bss.height    0x0080017f        0x1 main.o
-                0x0080017f                height
- .bss.rate      0x00800180        0x1 main.o
-                0x00800180                rate
- .bss.dataport  0x00800181        0x1 lcdpcf8574/lcdpcf8574.o
-                0x00800181                dataport
+ .bss.relay     0x0080017c        0x1 main.o
+                0x0080017c                relay
+ .bss.height    0x0080017d        0x1 main.o
+                0x0080017d                height
+ .bss.rate      0x0080017e        0x1 main.o
+                0x0080017e                rate
+ .bss.second    0x0080017f        0x1 main.o
+                0x0080017f                second
+ .bss.minute    0x00800180        0x1 main.o
+                0x00800180                minute
+ .bss.hour      0x00800181        0x1 main.o
+                0x00800181                hour
+ .bss.dataport  0x00800182        0x1 lcdpcf8574/lcdpcf8574.o
+                0x00800182                dataport
  .bss.UART_LastRxError
-                0x00800182        0x1 uart/uart.o
- .bss.UART_RxTail
                 0x00800183        0x1 uart/uart.o
- .bss.UART_RxHead
+ .bss.UART_RxTail
                 0x00800184        0x1 uart/uart.o
- .bss.UART_TxTail
+ .bss.UART_RxHead
                 0x00800185        0x1 uart/uart.o
- .bss.UART_TxHead
+ .bss.UART_TxTail
                 0x00800186        0x1 uart/uart.o
+ .bss.UART_TxHead
+                0x00800187        0x1 uart/uart.o
  .bss.UART_RxBuf
-                0x00800187       0x20 uart/uart.o
+                0x00800188       0x20 uart/uart.o
  .bss.UART_TxBuf
-                0x008001a7       0x20 uart/uart.o
+                0x008001a8       0x20 uart/uart.o
  *(COMMON)
- COMMON         0x008001c7        0x8 lcdpcf8574/lcdpcf8574.o
-                0x008001c7                pcf8574_pinstatus
-                0x008001cf                PROVIDE (__bss_end, .)
-                0x00000ff6                __data_load_start = LOADADDR (.data)
-                0x00001074                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x008001c8        0x8 lcdpcf8574/lcdpcf8574.o
+                0x008001c8                pcf8574_pinstatus
+                0x008001d0                PROVIDE (__bss_end, .)
+                0x00000fe8                __data_load_start = LOADADDR (.data)
+                0x00001064                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x008001cf        0x0
+.noinit         0x008001d0        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x008001cf                _end = .
+                0x008001d0                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -731,14 +732,14 @@ END GROUP
  .debug_abbrev  0x00000bb2      0x1f0 pcf8574/pcf8574.o
  .debug_abbrev  0x00000da2      0x13c uart/uart.o
 
-.debug_line     0x00000000      0xfaa
+.debug_line     0x00000000      0xf68
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000       0x1a c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5/crtatmega328p.o
- .debug_line    0x0000001a      0x395 main.o
- .debug_line    0x000003af      0x238 i2chw/twimaster.o
- .debug_line    0x000005e7      0x4a2 lcdpcf8574/lcdpcf8574.o
- .debug_line    0x00000a89      0x344 pcf8574/pcf8574.o
- .debug_line    0x00000dcd      0x1dd uart/uart.o
+ .debug_line    0x0000001a      0x353 main.o
+ .debug_line    0x0000036d      0x238 i2chw/twimaster.o
+ .debug_line    0x000005a5      0x4a2 lcdpcf8574/lcdpcf8574.o
+ .debug_line    0x00000a47      0x344 pcf8574/pcf8574.o
+ .debug_line    0x00000d8b      0x1dd uart/uart.o
 
 .debug_frame    0x00000000      0x458
  *(.debug_frame)

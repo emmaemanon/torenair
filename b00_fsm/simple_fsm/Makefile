@@ -22,7 +22,7 @@ LIBDIR = .
 
 PROGRAMMER_TYPE = arduino
 # extra arguments to avrdude: baud rate, chip type, -F flag, etc.
-PROGRAMMER_ARGS = -P com3
+PROGRAMMER_ARGS = -P com5
 
 ##########------------------------------------------------------##########
 ##########                  Program Locations                   ##########

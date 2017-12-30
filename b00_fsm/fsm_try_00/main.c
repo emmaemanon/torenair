@@ -1,4 +1,18 @@
-//TIME STAMPER
+//MAIN FSM
+//TO DO:
+//bikin keypad mapping
+//pisahin fungsi timer (ISR)
+//pisahin display_main
+//bikin fsm di file terpisah
+//uji fsm
+//finalisasi fungsi-fungsi:
+//relay
+//ultrasonik
+//halaman2 menu dan prompt
+//menu-menu:
+//
+//prompt-prompt:
+//
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -17,15 +31,17 @@
 
 #define UART_BAUD_RATE 9600
 
-volatile uint16_t year = 2017;//1; //MAX 65536
-volatile uint8_t month = 12;//1; //MAX 12
-volatile uint8_t day = 30;//1; //MAX 31
-volatile uint8_t hour = 22;//; //MAX 23
-volatile uint8_t minute = 27;//; //MAX 60
-volatile uint8_t second = 5; //MAX 60
+volatile uint16_t year = 1; //MAX 65536
+volatile uint8_t month = 1; //MAX 12
+volatile uint8_t day = 1; //MAX 31
+volatile uint8_t hour = 0; //MAX 23
+volatile uint8_t minute = 0; //MAX 60
+volatile uint8_t second = 0; //MAX 60
 volatile uint8_t rate = 0;
-volatile uint8_t height = 0;
+volatile uint8_t tank_height = 0;
+volatile uint8_t ultrasonic_reading = 0;
 volatile uint8_t relay = 0;
+volatile uint8_t relay_mode = 0;
 
 //interrupt penghitung waktu
 ISR(TIMER1_COMPA_vect)
@@ -142,22 +158,11 @@ int main (void)
 	
 	while(1)
 	{
-		//DDRA = 0x00;
-		DDRB = 0x00;
-		DDRC = 0x00;
-		DDRD = 0x00;
-		//PORTA = 0xFF;
-		PORTB = 0xFF;
-		PORTC = 0xFF;
-		PORTD = 0xFF;
 		
 		display_main(month, day, hour, minute, second, rate, height, relay);
 		
 		_delay_ms(20);
 		
-		//sprintf(buf, "%2d-%2d-%2d|%2d:%2d:%2d", year, month, day, hour, minute, second);
-		//uart_puts(buf);
-		//uart_puts("\r\n");
 	}
 }
 
