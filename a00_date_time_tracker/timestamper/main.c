@@ -19,10 +19,10 @@
 
 volatile uint16_t year = 2017;//1; //MAX 65536
 volatile uint8_t month = 12;//1; //MAX 12
-volatile uint8_t day = 30;//1; //MAX 31
-volatile uint8_t hour = 22;//; //MAX 23
-volatile uint8_t minute = 27;//; //MAX 60
-volatile uint8_t second = 5; //MAX 60
+volatile uint8_t day = 31;//1; //MAX 31
+volatile uint8_t hour = 6;//; //MAX 23
+volatile uint8_t minute = 16;//; //MAX 60
+volatile uint8_t second = 4; //MAX 60
 volatile uint8_t rate = 0;
 volatile uint8_t height = 0;
 volatile uint8_t relay = 0;
@@ -77,10 +77,11 @@ ISR(TIMER1_COMPA_vect)
 
 void display_main(uint8_t month, uint8_t day, uint8_t hour, uint8_t minute, uint8_t second, uint8_t rate, uint8_t height, uint8_t relay)
 {
-	char buf1[16];
-	char buf2[16];
+	char buf1[20];
+	char buf2[20];
 	char buf_m[4];
 	char buf_r[4];
+	char buf_r_m;
 	
 	switch(month){
 		case 1: strcpy(buf_m, "Jan\0"); break;
@@ -102,10 +103,11 @@ void display_main(uint8_t month, uint8_t day, uint8_t hour, uint8_t minute, uint
 		case 1: strcpy(buf_r, " ON\0"); break;
 		default: strcpy(buf_r, "   \0");
 	}
+	buf_r_m = 0xFF;
 	
 	//taruh parameter
-	sprintf(buf1, "%c%c%c-%2d|%2d:%2d:%2d", buf_m[0], buf_m[1], buf_m[2], day, hour, minute, second);
-	sprintf(buf2, "%3ds|%4dcm|%c%c%c", rate, height, buf_r[0], buf_r[1], buf_r[2]);
+	sprintf(buf1, "%c%c%c-%2d|%2d:%2d:%2d%c", buf_m[0], buf_m[1], buf_m[2], day, hour, minute, second,buf_r_m);
+	sprintf(buf2, "%3ds|%4dcm|%c%c%c%c", rate, height, buf_r[0], buf_r[1], buf_r[2],buf_r_m);
 	
 	lcd_gotoxy(0, 0);
 	lcd_puts(buf1);
@@ -132,11 +134,11 @@ int main (void)
     //lcd go home
     lcd_home();
 	
-	EICRA = 0x0F; //rising edge INT0 dan INT1 memberikan interrupt
-	EIMSK = 0x03; //mengaktifkan INT0 dan INT1
+	//EICRA = 0x0F; //rising edge INT0 dan INT1 memberikan interrupt
+	//EIMSK = 0x03; //mengaktifkan INT0 dan INT1
 	
-	TCCR1B = (1<<CS12)|(1<<WGM12); //CS12 untuk prescaler 256, WGM12 untuk mode operasi CTC
-	OCR1A = 62500-1; //nilai OCRA dengan F_CPU 16MHz dan waktu countdown 1 detik
+	TCCR1B = (1<<WGM12)|(1<<CS12)|(0<<CS11)|(1<<CS10);//(1<<WGM12)|(1<<CS12);//(1<<WGM12)|(1<<CS12)|(0<<CS11)|(1<<CS10); //CS12 untuk prescaler 1024, WGM12 untuk mode operasi CTC
+	OCR1A = 15624;//62499; //nilai OCRA dengan F_CPU 16MHz dan untuk waktu countdown 1 detik
 	TIMSK1 = (1<<OCIE1A); //mengaktifkan Timer/Counter2 Compare Match A
 	sei(); //set global interrupt enable
 	
