@@ -42,7 +42,7 @@ uint8_t second = 0;
 
 volatile uint16_t rate = 1;
 uint8_t relay = 0;
-uint8_t relay_mode = 0;
+uint8_t relay_mode = RELAY_AUTO;
 
 // variabel untuk tanki atau toren
 uint16_t tank_height = TANK_HEIGHT_CM; // dalam cm
@@ -67,12 +67,8 @@ uint8_t last_keynumber;
 uint8_t last_keynumber_temp;
 uint8_t button_state;
 
-// char uart_buf;
-
-// static void TaskDisplay(void *pvParameters); //
 static void TaskMain(void *pvParameters); //
 static void TaskSonar(void *pvParameters); //
-// static void TaskTransmit(void *pvParameters); //
 
 void init_time_keypad(void);
 void initializer(void);
@@ -103,14 +99,6 @@ int main (void) {
 	
 	sei();
 	
-    // xTaskCreate(
-		// TaskDisplay
-		// ,  (const portCHAR *)"TaskDisplay"
-		// ,  256
-		// ,  NULL
-		// ,  3
-		// ,  NULL ); // */
-	
     xTaskCreate(
 		TaskMain
 		,  (const portCHAR *)"TaskMain"
@@ -127,28 +115,8 @@ int main (void) {
 		,  3
 		,  NULL ); // */
 	
-    // xTaskCreate(
-		// TaskTransmit
-		// ,  (const portCHAR *)"TaskSonar"
-		// ,  256
-		// ,  NULL
-		// ,  3
-		// ,  NULL ); // */
-	
 	vTaskStartScheduler();
-	// return 0;
 }
-// static void TaskDisplay(void *pvParameters) {
-    // (void) pvParameters;
-    // TickType_t xLastWakeTime;
-	// xLastWakeTime = xTaskGetTickCount();
-	// display_msg();
-    // for(;;)
-    // {
-		// display_msg();
-		// vTaskDelayUntil( &xLastWakeTime, ( 20 / portTICK_PERIOD_MS ));
-    // }
-// }
 
 static void TaskMain(void *pvParameters) {
     (void) pvParameters;
@@ -271,8 +239,6 @@ void initializer(void) {
 	
     //lcd go home
     lcd_home();
-	
-	//sei(); //set global interrupt enable
 }
 
 

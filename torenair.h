@@ -1,5 +1,5 @@
-#ifndef TORENAIRCONF_H
-#define	TORENAIRCONF_H
+#ifndef TORENAIR_H
+#define	TORENAIR_H
 
 // ---------- ---------- ---------- ---------- //
 
@@ -10,7 +10,7 @@
 // RELAY_PORT |= (1 << RELAY_PIN);
 
 // ---------- Default Settings --------------- //
-#define MAX_WATER_HEIGHT	190 // ketinggian air maksimum dalam cm
+#define MAX_WATER_HEIGHT	200 // ketinggian air maksimum dalam cm
 #define TANK_HEIGHT_CM		200
 
 // ---------- Serial Transfer ---------------- //
@@ -154,7 +154,7 @@ void button_action(void);
 #define MODERELAY_A2M		36
 #define POST_MODERELAY_M	37
 
-void date_and_time(void);
+// void date_and_time(void);s
 void change_state(void);
 
 // ---------- Ultrasonic Definitions --------- //
@@ -179,7 +179,8 @@ void change_state(void);
 #define RELAY_DDR	DDRB
 #define RELAY_PORT	PORTB
 
-// void set_relay(volatile uint8_t *relay);
+#define RELAY_AUTO		65 // A
+#define RELAY_MANUAL	77 // M
 
 // ---------- Function Prototypes ------------ //
 
@@ -190,10 +191,7 @@ void init_time_keypad(void);
 void display_msg(void);
 void display_line1(void);
 void display_line2(void);
-void update_input(void);
+void put_char(uint8_t x, uint8_t y, char c);
 
 
-void put_char(volatile uint8_t x, uint8_t y, char c);
-
-
-#endif	/* TORENAIRCONF_H */
+#endif	/* TORENAIR_H */

@@ -13,8 +13,6 @@
 
 #include "torenair.h"
 
-extern volatile uint8_t sys_state; // system state
-
 extern uint8_t lcd_buffer1[17];
 extern uint8_t lcd_buffer2[17];
 
@@ -41,18 +39,7 @@ void display_line2(void) {
 	LCDstring(lcd_buffer2, strlen((char*) lcd_buffer2));
 }
 
-// Update and display user input based on system state and keypad button
-void update_input(void) {
-	// switch(sys_state) {
-		// case IDLE:
-			// switch (keynumber) {
-			// }
-			// break;
-		// default: break;
-	// }
-}
-
-void put_char(volatile uint8_t x, uint8_t y, char c) {
+void put_char(uint8_t x, uint8_t y, char c) {
 	lcd_gotoxy(x,y);
 	lcd_putc(c);
 }

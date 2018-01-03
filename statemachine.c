@@ -5,20 +5,14 @@
 #include <stdint.h>
 
 #include <avr/io.h>
-// #include <avr/pgmspace.h>
 #include <avr/interrupt.h>
 #include <util/delay.h>
 
 #include "torenair.h"
-// #include "statemachine.h"
-// #include "display.h"
-// #include "keypad.h"
 
+extern volatile uint8_t sys_state; // state sistem
 
-// extern uint16_t systime_ms; // system state
-
-extern volatile uint8_t sys_state; // system state
-
+// untuk waktu dan tanggal
 extern uint32_t year;
 extern uint8_t month;
 extern uint8_t day;
@@ -26,8 +20,8 @@ extern uint8_t day;
 extern uint8_t hour;
 extern uint8_t minute;
 extern uint8_t second;
-// extern uint16_t systime_ms;
 
+// untuk relay
 extern volatile uint16_t rate;
 extern uint8_t relay;
 extern uint8_t relay_mode;
@@ -37,7 +31,7 @@ uint8_t relay_set_manual;
 extern volatile uint16_t sonar_result;
 extern uint16_t tank_height;
 extern uint16_t water_height;
-uint16_t water_height_max;
+uint16_t water_height_max = 0;
 
 // untuk display
 extern uint8_t lcd_buffer1[17];
@@ -56,13 +50,15 @@ unsigned char count;
 uint8_t input[8];
 
 void date_and_time(void) {
+	char relay_mode_char;
+	relay_mode_char = relay_mode;
 	if (sonar_result <= tank_height) {
 			water_height = tank_height - sonar_result;
 	}
 	else {
 		water_height = tank_height;
 	}
-	if (((relay_mode == 0) && (water_height < water_height_max)) || ((relay_mode == 1) && (relay_set_manual == 1))) {
+	if (((relay_mode == RELAY_AUTO) && (water_height < water_height_max)) || ((relay_mode == RELAY_MANUAL) && (relay_set_manual == 1))) {
 		relay = 1;
 	}
 	else {
@@ -71,11 +67,8 @@ void date_and_time(void) {
 	count = 0;
 	input[0] = 0; input[1] = 0; input[2] = 0; input[3] = 0;
 	input[4] = 0; input[5] = 0; input[6] = 0; input[7] = 0;
-	// sprintf((char*) lcd_buffer1, "%3d-%3d|bf: %2d  ", last_butnum, butnum, button_flag);
-	// sprintf((char*) lcd_buffer2, "%3d-%3d|bS: %2d  ", last_keynumber, keynumber, button_state); 
-	// date = 0x00000000;
 	sprintf((char*) lcd_buffer1, "%2d-%2d|%2d:%2d:%2d|%d", month, day, hour, minute, second, button_flag);
-	sprintf((char*) lcd_buffer2, "%4ds|%4ucm|%d %d", rate, (unsigned)water_height, relay, relay_mode);
+	sprintf((char*) lcd_buffer2, "%4ds|%4ucm|%d %c", rate, (unsigned)water_height, relay, relay_mode_char);
 }
 
 void hidden_par(void) {
@@ -83,19 +76,9 @@ void hidden_par(void) {
 	sprintf((char*) lcd_buffer2, "Tor: %4u cm    ", (unsigned)tank_height);
 }
 
-// void pre_change_date(void) {
-	// sprintf((char*) lcd_buffer1, "Ubah Tanggal :  ");
-	// sprintf((char*) lcd_buffer2, "%d%d%d%d            ", input[0], input[1], input[2], input[3]);
-	// static int i = 0;
-	// for (i = 0; i < 8; i++) {
-		
-	// }
-	//sprintf((char*) lcd_buffer2, "%", (unsigned)tank_height);
-// }
-
 void change_state(void) {
 	switch (sys_state) {
-		// Idle: Go to other modes if correct buttons pressed
+		// DEFAULT: Go to other modes if correct buttons pressed
 		case DEFAULT:
 			date_and_time();
 			if ((keynumber == KEY_str) && (button_state == MAYBE_PUSH_STATE)) { sys_state = HIDDENPAR; }
@@ -120,7 +103,6 @@ void change_state(void) {
 			if ((keynumber == KEY_A) && (button_state == MAYBE_PUSH_STATE)) { sys_state = CHANGETIME_h1; }
 		break;
 		case CHANGEDATE_Y2:
-			// sprintf((char*) lcd_buffer1, "Ubah Tanggal : %d", count);
 			sprintf((char*) lcd_buffer2, "%d%d%d%d - %d%d - %d%d !", input[0], input[1], input[2], input[3], input[4], input[5], input[6], input[7]);
 			if ((keynumber < 10) && (button_state == MAYBE_PUSH_STATE)) {
 				input[count] = keynumber;
@@ -131,7 +113,6 @@ void change_state(void) {
 			if ((keynumber == KEY_A) && (button_state == MAYBE_PUSH_STATE)) { sys_state = CHANGETIME_h1; }
 		break;
 		case CHANGEDATE_Y1:
-			// sprintf((char*) lcd_buffer1, "Ubah Tanggal : %d", count);
 			sprintf((char*) lcd_buffer2, "%d%d%d%d - %d%d - %d%d  ", input[0], input[1], input[2], input[3], input[4], input[5], input[6], input[7]);
 			if ((keynumber < 10) && (button_state == MAYBE_PUSH_STATE)) {
 				input[count] = keynumber;
@@ -142,7 +123,6 @@ void change_state(void) {
 			if ((keynumber == KEY_A) && (button_state == MAYBE_PUSH_STATE)) { sys_state = CHANGETIME_h1; }
 		break;
 		case CHANGEDATE_Y0:
-			// sprintf((char*) lcd_buffer1, "Ubah Tanggal : %d", count);
 			sprintf((char*) lcd_buffer2, "%d%d%d%d - %d%d - %d%d !", input[0], input[1], input[2], input[3], input[4], input[5], input[6], input[7]);
 			if ((keynumber < 10) && (button_state == MAYBE_PUSH_STATE)) {
 				input[count] = keynumber;
@@ -153,7 +133,6 @@ void change_state(void) {
 			if ((keynumber == KEY_A) && (button_state == MAYBE_PUSH_STATE)) { sys_state = CHANGETIME_h1; }
 		break;
 		case CHANGEDATE_M1:
-			// sprintf((char*) lcd_buffer1, "Ubah Tanggal : %d", count);
 			sprintf((char*) lcd_buffer2, "%d%d%d%d - %d%d - %d%d  ", input[0], input[1], input[2], input[3], input[4], input[5], input[6], input[7]);
 			if ((keynumber < 10) && (button_state == MAYBE_PUSH_STATE)) {
 				input[count] = keynumber;
@@ -222,7 +201,7 @@ void change_state(void) {
 		break;
 		case CHANGETIME_h0:
 			// sprintf((char*) lcd_buffer1, "Ubah Tanggal : %d", count);
-			sprintf((char*) lcd_buffer2, "%d%d - %d%d - %d%d    ", input[0], input[1], input[2], input[3], input[4], input[5]);
+			sprintf((char*) lcd_buffer2, "%d%d - %d%d - %d%d   !", input[0], input[1], input[2], input[3], input[4], input[5]);
 			if ((keynumber < 10) && (button_state == MAYBE_PUSH_STATE)) {
 				input[count] = keynumber;
 				sys_state = CHANGETIME_m1;
@@ -233,7 +212,7 @@ void change_state(void) {
 		break;
 		case CHANGETIME_m1:
 			// sprintf((char*) lcd_buffer1, "Ubah Tanggal : %d", count);
-			sprintf((char*) lcd_buffer2, "%d%d - %d%d - %d%d   !", input[0], input[1], input[2], input[3], input[4], input[5]);
+			sprintf((char*) lcd_buffer2, "%d%d - %d%d - %d%d    ", input[0], input[1], input[2], input[3], input[4], input[5]);
 			if ((keynumber < 10) && (button_state == MAYBE_PUSH_STATE)) {
 				input[count] = keynumber;
 				count++;
@@ -244,7 +223,7 @@ void change_state(void) {
 		break;
 		case CHANGETIME_m0:
 			// sprintf((char*) lcd_buffer1, "Ubah Tanggal : %d", count);
-			sprintf((char*) lcd_buffer2, "%d%d - %d%d - %d%d    ", input[0], input[1], input[2], input[3], input[4], input[5]);
+			sprintf((char*) lcd_buffer2, "%d%d - %d%d - %d%d   !", input[0], input[1], input[2], input[3], input[4], input[5]);
 			if ((keynumber < 10) && (button_state == MAYBE_PUSH_STATE)) {
 				input[count] = keynumber;
 				count++;
@@ -255,7 +234,7 @@ void change_state(void) {
 		break;
 		case CHANGETIME_d1:
 			// sprintf((char*) lcd_buffer1, "Ubah Tanggal : %d", count);
-			sprintf((char*) lcd_buffer2, "%d%d - %d%d - %d%d   !", input[0], input[1], input[2], input[3], input[4], input[5]);
+			sprintf((char*) lcd_buffer2, "%d%d - %d%d - %d%d    ", input[0], input[1], input[2], input[3], input[4], input[5]);
 			if ((keynumber < 10) && (button_state == MAYBE_PUSH_STATE)) {
 				input[count] = keynumber;
 				count++;
@@ -266,7 +245,7 @@ void change_state(void) {
 		break;
 		case CHANGETIME_d0:
 			// sprintf((char*) lcd_buffer1, "Ubah Tanggal : %d", count);
-			sprintf((char*) lcd_buffer2, "%d%d - %d%d - %d%d    ", input[0], input[1], input[2], input[3], input[4], input[5]);
+			sprintf((char*) lcd_buffer2, "%d%d - %d%d - %d%d   !", input[0], input[1], input[2], input[3], input[4], input[5]);
 			if ((keynumber < 10) && (button_state == MAYBE_PUSH_STATE)) {
 				input[count] = keynumber;
 				sys_state = POST_CHANGETIME;
@@ -433,14 +412,14 @@ void change_state(void) {
 			if ((keynumber == KEY_A) && (button_state == MAYBE_PUSH_STATE)) { sys_state = DEFAULT; }
 		break;
 		case PRE_MODERELAY:
-			if (relay_mode == 0) {
+			if (relay_mode == RELAY_AUTO) {
 				sys_state = MODERELAY_A2M;
 			}
-			if (relay_mode == 1) {
+			if (relay_mode == RELAY_MANUAL) {
 				sprintf((char*) lcd_buffer1, "#-Ubah dari M>A?");
 				sprintf((char*) lcd_buffer2, "D-Mode M: ON/OFF");
 				if ((keynumber == KEY_krs)) {
-					relay_mode = 0;
+					relay_mode = RELAY_AUTO;
 					sys_state = DEFAULT;
 				}
 			}
@@ -451,7 +430,7 @@ void change_state(void) {
 			sprintf((char*) lcd_buffer1, "#-Ubah dari A>M?");
 			sprintf((char*) lcd_buffer2, "D-Mode M: ON/OFF");
 			if ((keynumber == KEY_krs) && (button_state == MAYBE_PUSH_STATE)) {
-				relay_mode = 1;
+				relay_mode = RELAY_MANUAL;
 				sys_state = MODERELAY_M;
 			}
 			if ((keynumber == KEY_D) && (button_state == MAYBE_PUSH_STATE)) { sys_state = MODERELAY_M; }
@@ -462,12 +441,12 @@ void change_state(void) {
 			sprintf((char*) lcd_buffer2, "0-Mode M: OFF   ");
 			if ((keynumber == 1) && (button_state == MAYBE_PUSH_STATE)) {
 				relay_set_manual = 1;
-				relay_mode = 1;
+				relay_mode = RELAY_MANUAL;
 				sys_state = DEFAULT;
 			}
 			if ((keynumber == 0) && (button_state == MAYBE_PUSH_STATE)) {
 				relay_set_manual = 0;
-				relay_mode = 1;
+				relay_mode = RELAY_MANUAL;
 				sys_state = DEFAULT;
 			}
 			if (keynumber == KEY_str) { sys_state = DEFAULT; };
