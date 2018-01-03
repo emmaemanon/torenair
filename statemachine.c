@@ -208,7 +208,7 @@ void change_state(void) {
 				count++;
 			}
 			if (keynumber == KEY_str) { sys_state = DEFAULT; }
-			if ((keynumber == KEY_A) && (button_state == MAYBE_PUSH_STATE)) { sys_state = DEFAULT; }
+			// if ((keynumber == KEY_A) && (button_state == MAYBE_PUSH_STATE)) { sys_state = DEFAULT; }
 		break;
 		case CHANGETIME_m1:
 			// sprintf((char*) lcd_buffer1, "Ubah Tanggal : %d", count);
@@ -219,7 +219,7 @@ void change_state(void) {
 				sys_state = CHANGETIME_m0;
 			}
 			if (keynumber == KEY_str) { sys_state = DEFAULT; }
-			if ((keynumber == KEY_A) && (button_state == MAYBE_PUSH_STATE)) { sys_state = DEFAULT; }
+			// if ((keynumber == KEY_A) && (button_state == MAYBE_PUSH_STATE)) { sys_state = DEFAULT; }
 		break;
 		case CHANGETIME_m0:
 			// sprintf((char*) lcd_buffer1, "Ubah Tanggal : %d", count);
@@ -230,7 +230,7 @@ void change_state(void) {
 				sys_state = CHANGETIME_d1;
 			}
 			if (keynumber == KEY_str) { sys_state = DEFAULT; }
-			if ((keynumber == KEY_A) && (button_state == MAYBE_PUSH_STATE)) { sys_state = DEFAULT; }
+			// if ((keynumber == KEY_A) && (button_state == MAYBE_PUSH_STATE)) { sys_state = DEFAULT; }
 		break;
 		case CHANGETIME_d1:
 			// sprintf((char*) lcd_buffer1, "Ubah Tanggal : %d", count);
@@ -241,7 +241,7 @@ void change_state(void) {
 				sys_state = CHANGETIME_d0;
 			}
 			if (keynumber == KEY_str) { sys_state = DEFAULT; }
-			if ((keynumber == KEY_A) && (button_state == MAYBE_PUSH_STATE)) { sys_state = DEFAULT; }
+			// if ((keynumber == KEY_A) && (button_state == MAYBE_PUSH_STATE)) { sys_state = DEFAULT; }
 		break;
 		case CHANGETIME_d0:
 			// sprintf((char*) lcd_buffer1, "Ubah Tanggal : %d", count);
@@ -251,7 +251,7 @@ void change_state(void) {
 				sys_state = POST_CHANGETIME;
 			}
 			if (keynumber == KEY_str) { sys_state = DEFAULT; }
-			if ((keynumber == KEY_A) && (button_state == MAYBE_PUSH_STATE)) { sys_state = DEFAULT; }
+			// if ((keynumber == KEY_A) && (button_state == MAYBE_PUSH_STATE)) { sys_state = DEFAULT; }
 		break;
 		case POST_CHANGETIME:
 			// sprintf((char*) lcd_buffer1, "Ubah Tanggal : %d", count);
@@ -263,7 +263,7 @@ void change_state(void) {
 				sys_state = DEFAULT;
 			}
 			if (keynumber == KEY_str) { sys_state = DEFAULT; }
-			if ((keynumber == KEY_A) && (button_state == MAYBE_PUSH_STATE)) { sys_state = DEFAULT; }
+			// if ((keynumber == KEY_A) && (button_state == MAYBE_PUSH_STATE)) { sys_state = DEFAULT; }
 		break;
 		case PRE_WATERMAX_W3:
 			sprintf((char*) lcd_buffer1, "Set Tinggi Max  ");
@@ -320,6 +320,7 @@ void change_state(void) {
 				sys_state = CHANGERATE_R2;
 			}
 			if (keynumber == KEY_str) { sys_state = DEFAULT; }
+			if ((keynumber == KEY_B) && (button_state == MAYBE_PUSH_STATE)) { sys_state = DEFAULT; }
 		break;
 		case CHANGERATE_R2:
 			sprintf((char*) lcd_buffer2, "per %d%d%d%d detik !", input[0], input[1], input[2], input[3]);
@@ -375,6 +376,7 @@ void change_state(void) {
 				sys_state = PRE_TANKHEIGHT_X2;
 			}
 			if (keynumber == KEY_str) { sys_state = DEFAULT; }
+			if ((keynumber == KEY_C) && (button_state == MAYBE_PUSH_STATE)) { sys_state = DEFAULT; }
 		break;
 		case PRE_TANKHEIGHT_X2:
 			sprintf((char*) lcd_buffer2, "ke %d%d%d%d cm     !", input[0], input[1], input[2], input[3]);
@@ -450,6 +452,7 @@ void change_state(void) {
 				sys_state = DEFAULT;
 			}
 			if (keynumber == KEY_str) { sys_state = DEFAULT; };
+			if ((keynumber == KEY_D) && (button_state == MAYBE_PUSH_STATE)) { sys_state = DEFAULT; }
 		break;
 	default: break;
 	}

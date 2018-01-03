@@ -16,7 +16,6 @@ extern uint8_t keynumber; // Actual numerical value of button number
 extern uint8_t button_flag;
 extern uint8_t last_butnum; // Last stored keypad number
 extern uint8_t last_keynumber;
-extern uint8_t last_keynumber_temp;
 extern uint8_t button_state;
 
 uint8_t keymap(uint8_t input) {
@@ -194,8 +193,7 @@ void button_action(void) {
 	// Change state based on setting button press
 	change_state();
 	display_msg();
-	last_keynumber_temp = keynumber;
-	last_keynumber = last_keynumber_temp;
+	last_keynumber = keynumber;
 }
 
 

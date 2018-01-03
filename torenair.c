@@ -64,7 +64,6 @@ uint8_t keynumber; // Actual numerical value of button number
 uint8_t last_butnum; // Actual numerical value of button number
 uint8_t button_flag;
 uint8_t last_keynumber;
-uint8_t last_keynumber_temp;
 uint8_t button_state;
 
 static void TaskMain(void *pvParameters); //
@@ -144,10 +143,6 @@ static void TaskMain(void *pvParameters) {
 		if (button_flag == PUSHED_FLAG) {
 			button_action();
 		}
-		// if (button_flag == NOT_PUSHED_FLAG)
-		// {
-			// last_keynumber = last_keynumber_temp;
-		// }
 		
 		change_state();
 		display_msg();
