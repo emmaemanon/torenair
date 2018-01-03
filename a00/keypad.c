@@ -2,17 +2,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdint.h>
+
 #include <avr/io.h>
-#include <avr/pgmspace.h>
 #include <avr/interrupt.h>
 #include <util/delay.h>
 #include "uart/uart.h"
 
-#define UART_BAUD_RATE 9600
-
-#include "keypad.h"
-#include "display.h"
-#include "statemachine.h"
+#include "torenair.h"
 
 extern uint8_t butnum; // The decoded button number
 extern uint8_t keynumber; // Actual numerical value of button number
@@ -21,9 +18,6 @@ extern uint8_t last_butnum; // Last stored keypad number
 extern uint8_t last_keynumber;
 extern uint8_t last_keynumber_temp;
 extern uint8_t button_state;
-
-uint8_t edit_state;	// Enable user input
-char user_input[17];
 
 uint8_t keymap(uint8_t input) {
 	switch(input) {
@@ -99,7 +93,6 @@ uint8_t read_keypad(void)
 {
 	last_butnum = butnum;
 	unsigned char r, c;
-	//unsigned char but_num;
 	
 	DDR_R1 &= ~(1 << PD_R1);
 	DDR_R2 &= ~(1 << PD_R2);
@@ -119,34 +112,27 @@ uint8_t read_keypad(void)
 			if (bit_is_clear(PIN_R1, PD_R1)) {
 				_delay_us(1000);
 				if (bit_is_clear(PIN_R1, PD_R1)) {
-					//but_num = c;//
 					return (c);
 				}
-				//but_num = NO_BUTTON_PUSHED;//
-				return NO_BUTTON_PUSHED;//(0xFF);
+				return NO_BUTTON_PUSHED;
 			}
 			if (bit_is_clear(PIN_R2, PD_R2)) {
 				_delay_us(1000);
 				if (bit_is_clear(PIN_R2, PD_R2)) {
-					//but_num = c + 4;//
 					return (c + 4);
 				}
-				//but_num = NO_BUTTON_PUSHED;//
-				return NO_BUTTON_PUSHED;//(0xFF);
+				return NO_BUTTON_PUSHED;
 			}
 			if (bit_is_clear(PIN_R3, PD_R3)) {
 				_delay_us(1000);
 				if (bit_is_clear(PIN_R3, PD_R3)) {
-					//but_num = c + 8;//
 					return (c + 8);
 				}
-				//but_num = NO_BUTTON_PUSHED;//
-				return NO_BUTTON_PUSHED;//(0xFF);
+				return NO_BUTTON_PUSHED;
 			}
 			if (bit_is_clear(PIN_R4, PD_R4)) {
 				_delay_us(1000);
 				if (bit_is_clear(PIN_R4, PD_R4)) {
-					//but_num = c + 12;//
 					return (c + 12);
 				}
 				return NO_BUTTON_PUSHED;
@@ -161,7 +147,6 @@ void check_button(void) {
     if ((butnum == NO_BUTTON_PUSHED) || (last_butnum != butnum)) {
         button_state = RELEASED_STATE;
         button_flag = NOT_PUSHED_FLAG;
-		// strcpy(user_input, "               ");
 	}
 }
 
@@ -206,20 +191,11 @@ void debounce_button(void) {
 
 // Determine button action based on button pressed
 void button_action(void) {
-	if (edit_state == EDIT_ON) {
-		update_input();
-	}
-	
 	// Change state based on setting button press
 	change_state();
 	display_msg();
-	//check_button();
-	//if (button_flag != NOT_PUSHED_FLAG)
-	// //{
-		last_keynumber_temp = keynumber;
-	// //}
-		last_keynumber = last_keynumber_temp;
-	
+	last_keynumber_temp = keynumber;
+	last_keynumber = last_keynumber_temp;
 }
 
 

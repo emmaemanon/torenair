@@ -5,14 +5,12 @@
 #include <stdint.h>
 
 #include <avr/io.h>
-#include <avr/pgmspace.h>
 #include <avr/interrupt.h>
 #include <util/delay.h>
 
 #include "uart/uart.h"
 #include "lcdpcf8574/lcdpcf8574.h"
 
-#include "display.h"
 #include "torenair.h"
 
 extern volatile uint8_t sys_state; // system state

@@ -27,11 +27,19 @@
 #include "ultrasonic.h"
 #include "torenair.h"
 
+// #define UART_BAUD_RATE 9600
+
 volatile uint16_t systime_ms; // system state
 volatile uint8_t sys_state = DEFAULT; // system state
 
 // Task time variables
 volatile uint32_t task_time_debounce = TASK_PERIOD_DEBOUNCE_MS; // time left before next button debounce (in ms)
+volatile uint32_t task_time_serial_xfer = TASK_PERIOD_SERIAL_XFER_MS;	// time left before next byte of data is transfered (in ms)
+
+// Serial transfer variables
+uint8_t xfer_flag = XFER_NODATA;	// flag to indicate whether data is ready to be sent via UART
+uint8_t xfer_val = 0;					// measured stethoscope value to transfer via UART
+uint8_t xfer_counter = 0;						// counter used in Timer 1 Compare A ISR to take samples at 100 Hz for serial transfer
 
 uint32_t year = 2018;
 uint8_t month = 1;
@@ -41,12 +49,13 @@ uint8_t hour = 0;
 uint8_t minute = 0;
 uint8_t second = 0;
 
-uint16_t rate = 0;
+volatile uint16_t rate = 1;
 uint8_t relay = 0;
 uint8_t relay_mode = 0;
 
 // variabel untuk tanki atau toren
 uint16_t tank_height = TANK_HEIGHT_CM; // dalam cm
+uint16_t water_height;
 
 
 // variabel untuk ultrasonik
@@ -68,14 +77,21 @@ uint8_t last_keynumber_temp;
 uint8_t button_state;
 
 
+char uart_buf;
+
+
 // static void TaskDisplay(void *pvParameters); //
 static void TaskMain(void *pvParameters); //
 static void TaskSonar(void *pvParameters); //
+// static void TaskTransmit(void *pvParameters); //
 
 //program utama
 int main (void) {
 	cli();
 	initialize();
+	
+	// ------------------- UART init code --------------------
+	uart_init( UART_BAUD_SELECT(UART_BAUD_RATE,F_CPU) );
 	
 	// ------------------- ultrasonic init code --------------------
 	TRIG_DDR |= (1 << TRIG_PIN); // PD3 output - connected to Trig
@@ -118,6 +134,14 @@ int main (void) {
 		,  3
 		,  NULL ); // */
 	
+    // xTaskCreate(
+		// TaskTransmit
+		// ,  (const portCHAR *)"TaskSonar"
+		// ,  256
+		// ,  NULL
+		// ,  3
+		// ,  NULL ); // */
+	
 	vTaskStartScheduler();
 	// return 0;
 }
@@ -135,6 +159,8 @@ int main (void) {
 
 static void TaskMain(void *pvParameters) {
     (void) pvParameters;
+	char uart_buf[5];
+	
     TickType_t xLastWakeTime;
 	xLastWakeTime = xTaskGetTickCount();
 	display_msg();
@@ -163,6 +189,18 @@ static void TaskMain(void *pvParameters) {
 		
 		change_state();
 		display_msg();
+		
+		
+		if (task_time_serial_xfer == 0) {
+			// if (xfer_flag == XFER_RDY) {
+				sprintf(uart_buf, "%u\n\r", (unsigned)water_height);
+				uart_puts(uart_buf);
+				task_time_serial_xfer = rate * TASK_PERIOD_SERIAL_XFER_MS;
+				xfer_flag = XFER_NODATA;
+			// }
+		}
+		
+		
 		set_relay(&relay);
     }
 }
@@ -189,6 +227,24 @@ void TaskSonar(void *pvParameters) {
     }
 }
 
+// void TaskTransmit(void *pvParameters) {
+	// // char buf1[17];
+	// // char buf2[17];
+    // (void) pvParameters;
+    // TickType_t xLastWakeTime;
+	// xLastWakeTime = xTaskGetTickCount();
+	
+	// for(;;)
+    // {
+		// // sprintf(buf, "%ld", result);
+		// // uart_puts((char *) lcd_buffer1);
+		// // uart_puts("\r\n");
+		// // uart_puts((char *) lcd_buffer2);
+		// // uart_puts("\r\n");
+		// vTaskDelayUntil( &xLastWakeTime, ( 500 / portTICK_PERIOD_MS ));
+    // }
+// }
+
 /*-----------------------------------------------------------*/
 
 void vApplicationStackOverflowHook( TaskHandle_t xTask, portCHAR *pcTaskName ) {
@@ -202,6 +258,11 @@ ISR(TIMER2_COMPA_vect) {
 	// decrement debouncing task time
 	if (task_time_debounce > 0) {
 		task_time_debounce--;
+	}
+	
+	// decrement serial transfer task time
+	if (task_time_serial_xfer > 0) {
+		task_time_serial_xfer--;
 	}
 }
 
@@ -280,6 +341,7 @@ ISR(INT1_vect) {
 					else {
 						sonar_result = sonar_result;
 					}
+					xfer_flag = XFER_RDY;
 					sonar_running = 0;
 			}
 	}

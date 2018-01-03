@@ -1,7 +1,7 @@
 Archive member included to satisfy reference by file (symbol)
 
 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_udivmodsi4.o)
-                              main.o (__udivmodsi4)
+                              torenair.o (__udivmodsi4)
 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
                               c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5/crtatmega328p.o (exit)
 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_tablejump2.o)
@@ -9,7 +9,7 @@ c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_tablejump2.o)
 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_copy_data.o)
                               keypad.o (__do_copy_data)
 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_clear_bss.o)
-                              keypad.o (__do_clear_bss)
+                              statemachine.o (__do_clear_bss)
 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(malloc.o)
                               FreeRTOS/MemMang/heap_3.o (malloc)
 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(memcpy.o)
@@ -38,25 +38,23 @@ c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_epilogue.o)
 Allocating common symbols
 Common symbol       size              file
 
-keynumber           0x1               main.o
-butnum              0x1               main.o
-water_height        0x2               statemachine.o
+keynumber           0x1               torenair.o
+butnum              0x1               torenair.o
+water_height        0x2               torenair.o
 water_height_max    0x2               statemachine.o
 input               0x8               statemachine.o
-last_butnum         0x1               main.o
+last_butnum         0x1               torenair.o
 pcf8574_pinstatus   0x8               lcdpcf8574/lcdpcf8574.o
 __brkval            0x2               c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(malloc.o)
-user_input          0x11              keypad.o
-button_flag         0x1               main.o
+button_flag         0x1               torenair.o
 count               0x1               statemachine.o
-button_state        0x1               main.o
-systime_ms          0x2               main.o
-edit_state          0x1               keypad.o
+button_state        0x1               torenair.o
+systime_ms          0x2               torenair.o
 relay_set_manual    0x1               statemachine.o
 __flp               0x2               c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(malloc.o)
-last_keynumber      0x1               main.o
+last_keynumber      0x1               torenair.o
 last_keynumber_temp
-                    0x1               main.o
+                    0x1               torenair.o
 
 Discarded input sections
 
@@ -65,23 +63,22 @@ Discarded input sections
  .text          0x00000000        0x0 display.o
  .data          0x00000000        0x0 display.o
  .bss           0x00000000        0x0 display.o
+ .text.update_input
+                0x00000000        0x2 display.o
  .text.put_char
                 0x00000000       0x24 display.o
  .text          0x00000000        0x0 keypad.o
  .data          0x00000000        0x0 keypad.o
  .bss           0x00000000        0x0 keypad.o
- .text          0x00000000        0x0 main.o
- .data          0x00000000        0x0 main.o
- .bss           0x00000000        0x0 main.o
- .text          0x00000000        0x0 relay.o
- .data          0x00000000        0x0 relay.o
- .bss           0x00000000        0x0 relay.o
  .text          0x00000000        0x0 statemachine.o
  .data          0x00000000        0x0 statemachine.o
  .bss           0x00000000        0x0 statemachine.o
  .text          0x00000000        0x0 torenair.o
  .data          0x00000000        0x0 torenair.o
  .bss           0x00000000        0x0 torenair.o
+ .bss.xfer_counter
+                0x00000000        0x1 torenair.o
+ .bss.xfer_val  0x00000000        0x1 torenair.o
  .text          0x00000000        0x0 i2chw/twimaster.o
  .data          0x00000000        0x0 i2chw/twimaster.o
  .bss           0x00000000        0x0 i2chw/twimaster.o
@@ -120,10 +117,6 @@ Discarded input sections
  .bss           0x00000000        0x0 uart/uart.o
  .text.uart_getc
                 0x00000000       0x36 uart/uart.o
- .text.uart_putc
-                0x00000000       0x2a uart/uart.o
- .text.uart_puts
-                0x00000000       0x18 uart/uart.o
  .text.uart_puts_p
                 0x00000000       0x1e uart/uart.o
  .text          0x00000000        0x0 FreeRTOS/croutine.o
@@ -494,8 +487,6 @@ Address of section .data set to 0x800100
 LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5/crtatmega328p.o
 LOAD display.o
 LOAD keypad.o
-LOAD main.o
-LOAD relay.o
 LOAD statemachine.o
 LOAD torenair.o
 LOAD i2chw/twimaster.o
@@ -616,7 +607,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x4226
+.text           0x00000000     0x4338
  *(.vectors)
  .vectors       0x00000000       0x68 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5/crtatmega328p.o
                 0x00000000                __vector_default
@@ -709,323 +700,326 @@ END GROUP
  .text.display_msg
                 0x00000148        0x8 display.o
                 0x00000148                display_msg
- .text.update_input
-                0x00000150        0x2 display.o
-                0x00000150                update_input
- .text.keymap   0x00000152       0x14 keypad.o
-                0x00000152                keymap
- .text.DDRCol   0x00000166       0x2a keypad.o
-                0x00000166                DDRCol
- .text.PORTCol  0x00000190       0x2a keypad.o
-                0x00000190                PORTCol
+ .text.keymap   0x00000150       0x14 keypad.o
+                0x00000150                keymap
+ .text.DDRCol   0x00000164       0x2a keypad.o
+                0x00000164                DDRCol
+ .text.PORTCol  0x0000018e       0x2a keypad.o
+                0x0000018e                PORTCol
  .text.read_keypad
-                0x000001ba       0xe4 keypad.o
-                0x000001ba                read_keypad
+                0x000001b8       0xe4 keypad.o
+                0x000001b8                read_keypad
  .text.check_button
-                0x0000029e       0x1a keypad.o
-                0x0000029e                check_button
+                0x0000029c       0x1a keypad.o
+                0x0000029c                check_button
  .text.debounce_button
-                0x000002b8       0x60 keypad.o
-                0x000002b8                debounce_button
+                0x000002b6       0x60 keypad.o
+                0x000002b6                debounce_button
  .text.button_action
-                0x00000318       0x22 keypad.o
-                0x00000318                button_action
- .text.TaskSonar
-                0x0000033a       0x4c main.o
- .text.TaskMain
-                0x00000386       0x96 main.o
- .text.startup.main
-                0x0000041c       0x6a main.o
-                0x0000041c                main
- .text.vApplicationStackOverflowHook
-                0x00000486        0x2 main.o
-                0x00000486                vApplicationStackOverflowHook
- .text.__vector_7
-                0x00000488       0x74 main.o
-                0x00000488                __vector_7
- .text.__vector_11
-                0x000004fc      0x20a main.o
-                0x000004fc                __vector_11
- .text.__vector_16
-                0x00000706       0x92 main.o
-                0x00000706                __vector_16
- .text.__vector_2
-                0x00000798       0xf2 main.o
-                0x00000798                __vector_2
- .text.set_relay
-                0x0000088a       0x12 relay.o
-                0x0000088a                set_relay
+                0x00000316       0x16 keypad.o
+                0x00000316                button_action
  .text.date_and_time
-                0x0000089c      0x118 statemachine.o
-                0x0000089c                date_and_time
+                0x0000032c      0x118 statemachine.o
+                0x0000032c                date_and_time
  .text.hidden_par
-                0x000009b4       0x6a statemachine.o
-                0x000009b4                hidden_par
+                0x00000444       0x6a statemachine.o
+                0x00000444                hidden_par
  .text.change_state
-                0x00000a1e     0x128c statemachine.o
-                0x00000a1e                change_state
+                0x000004ae     0x1294 statemachine.o
+                0x000004ae                change_state
+ .text.TaskSonar
+                0x00001742       0x4c torenair.o
+ .text.vApplicationStackOverflowHook
+                0x0000178e        0x2 torenair.o
+                0x0000178e                vApplicationStackOverflowHook
  .text.init_time_keypad
-                0x00001caa       0x22 torenair.o
-                0x00001caa                init_time_keypad
- .text.initialize
-                0x00001ccc       0x3e torenair.o
-                0x00001ccc                initialize
+                0x00001790       0x20 torenair.o
+                0x00001790                init_time_keypad
+ .text.initializer
+                0x000017b0       0x40 torenair.o
+                0x000017b0                initializer
+ .text.startup.main
+                0x000017f0       0x72 torenair.o
+                0x000017f0                main
+ .text.set_relay
+                0x00001862        0xc torenair.o
+                0x00001862                set_relay
+ .text.TaskMain
+                0x0000186e      0x126 torenair.o
+ .text.__vector_7
+                0x00001994       0xb2 torenair.o
+                0x00001994                __vector_7
+ .text.__vector_11
+                0x00001a46      0x20a torenair.o
+                0x00001a46                __vector_11
+ .text.__vector_16
+                0x00001c50       0x92 torenair.o
+                0x00001c50                __vector_16
+ .text.__vector_2
+                0x00001ce2       0xf8 torenair.o
+                0x00001ce2                __vector_2
  .text.i2c_init
-                0x00001d0a        0xc i2chw/twimaster.o
-                0x00001d0a                i2c_init
+                0x00001dda        0xc i2chw/twimaster.o
+                0x00001dda                i2c_init
  .text.i2c_start
-                0x00001d16       0x44 i2chw/twimaster.o
-                0x00001d16                i2c_start
+                0x00001de6       0x44 i2chw/twimaster.o
+                0x00001de6                i2c_start
  .text.i2c_stop
-                0x00001d5a       0x10 i2chw/twimaster.o
-                0x00001d5a                i2c_stop
+                0x00001e2a       0x10 i2chw/twimaster.o
+                0x00001e2a                i2c_stop
  .text.i2c_write
-                0x00001d6a       0x22 i2chw/twimaster.o
-                0x00001d6a                i2c_write
+                0x00001e3a       0x22 i2chw/twimaster.o
+                0x00001e3a                i2c_write
  .text.toggle_e
-                0x00001d8c       0x12 lcdpcf8574/lcdpcf8574.o
+                0x00001e5c       0x12 lcdpcf8574/lcdpcf8574.o
  .text.lcd_write
-                0x00001d9e      0x13a lcdpcf8574/lcdpcf8574.o
+                0x00001e6e      0x13a lcdpcf8574/lcdpcf8574.o
  .text.lcd_read.constprop.0
-                0x00001ed8       0x66 lcdpcf8574/lcdpcf8574.o
+                0x00001fa8       0x66 lcdpcf8574/lcdpcf8574.o
  .text.lcd_waitbusy
-                0x00001f3e       0x14 lcdpcf8574/lcdpcf8574.o
+                0x0000200e       0x14 lcdpcf8574/lcdpcf8574.o
  .text.lcd_command
-                0x00001f52       0x12 lcdpcf8574/lcdpcf8574.o
-                0x00001f52                lcd_command
+                0x00002022       0x12 lcdpcf8574/lcdpcf8574.o
+                0x00002022                lcd_command
  .text.lcd_data
-                0x00001f64       0x12 lcdpcf8574/lcdpcf8574.o
-                0x00001f64                lcd_data
+                0x00002034       0x12 lcdpcf8574/lcdpcf8574.o
+                0x00002034                lcd_data
  .text.lcd_gotoxy
-                0x00001f76       0x22 lcdpcf8574/lcdpcf8574.o
-                0x00001f76                lcd_gotoxy
+                0x00002046       0x22 lcdpcf8574/lcdpcf8574.o
+                0x00002046                lcd_gotoxy
  .text.lcd_clrscr
-                0x00001f98        0x6 lcdpcf8574/lcdpcf8574.o
-                0x00001f98                lcd_clrscr
- .text.lcd_led  0x00001f9e       0x20 lcdpcf8574/lcdpcf8574.o
-                0x00001f9e                lcd_led
+                0x00002068        0x6 lcdpcf8574/lcdpcf8574.o
+                0x00002068                lcd_clrscr
+ .text.lcd_led  0x0000206e       0x20 lcdpcf8574/lcdpcf8574.o
+                0x0000206e                lcd_led
  .text.lcd_home
-                0x00001fbe        0x6 lcdpcf8574/lcdpcf8574.o
-                0x00001fbe                lcd_home
+                0x0000208e        0x6 lcdpcf8574/lcdpcf8574.o
+                0x0000208e                lcd_home
  .text.lcd_init
-                0x00001fc4       0xa2 lcdpcf8574/lcdpcf8574.o
-                0x00001fc4                lcd_init
+                0x00002094       0xa2 lcdpcf8574/lcdpcf8574.o
+                0x00002094                lcd_init
  .text.LCDstring
-                0x00002066       0x3a lcdpcf8574/lcdpcf8574.o
-                0x00002066                LCDstring
+                0x00002136       0x3a lcdpcf8574/lcdpcf8574.o
+                0x00002136                LCDstring
  .text.pcf8574_init
-                0x000020a0       0x22 pcf8574/pcf8574.o
-                0x000020a0                pcf8574_init
+                0x00002170       0x22 pcf8574/pcf8574.o
+                0x00002170                pcf8574_init
  .text.pcf8574_getoutputpin
-                0x000020c2       0x2a pcf8574/pcf8574.o
-                0x000020c2                pcf8574_getoutputpin
+                0x00002192       0x2a pcf8574/pcf8574.o
+                0x00002192                pcf8574_getoutputpin
  .text.pcf8574_setoutput
-                0x000020ec       0x32 pcf8574/pcf8574.o
-                0x000020ec                pcf8574_setoutput
+                0x000021bc       0x32 pcf8574/pcf8574.o
+                0x000021bc                pcf8574_setoutput
  .text.pcf8574_setoutputpin
-                0x0000211e       0x52 pcf8574/pcf8574.o
-                0x0000211e                pcf8574_setoutputpin
+                0x000021ee       0x52 pcf8574/pcf8574.o
+                0x000021ee                pcf8574_setoutputpin
  .text.pcf8574_setoutputpinhigh
-                0x00002170        0x6 pcf8574/pcf8574.o
-                0x00002170                pcf8574_setoutputpinhigh
+                0x00002240        0x6 pcf8574/pcf8574.o
+                0x00002240                pcf8574_setoutputpinhigh
  .text.pcf8574_setoutputpinlow
-                0x00002176        0x6 pcf8574/pcf8574.o
-                0x00002176                pcf8574_setoutputpinlow
+                0x00002246        0x6 pcf8574/pcf8574.o
+                0x00002246                pcf8574_setoutputpinlow
  .text.__vector_18
-                0x0000217c       0x56 uart/uart.o
-                0x0000217c                __vector_18
+                0x0000224c       0x56 uart/uart.o
+                0x0000224c                __vector_18
  .text.__vector_19
-                0x000021d2       0x54 uart/uart.o
-                0x000021d2                __vector_19
+                0x000022a2       0x54 uart/uart.o
+                0x000022a2                __vector_19
  .text.uart_init
-                0x00002226       0x32 uart/uart.o
-                0x00002226                uart_init
+                0x000022f6       0x32 uart/uart.o
+                0x000022f6                uart_init
+ .text.uart_putc
+                0x00002328       0x2a uart/uart.o
+                0x00002328                uart_putc
+ .text.uart_puts
+                0x00002352       0x18 uart/uart.o
+                0x00002352                uart_puts
  .text.vApplicationIdleHook
-                0x00002258       0x38 FreeRTOS/hooks.o
-                0x00002258                vApplicationIdleHook
+                0x0000236a       0x38 FreeRTOS/hooks.o
+                0x0000236a                vApplicationIdleHook
  .text.vApplicationMallocFailedHook
-                0x00002290       0x1a FreeRTOS/hooks.o
-                0x00002290                vApplicationMallocFailedHook
+                0x000023a2       0x1a FreeRTOS/hooks.o
+                0x000023a2                vApplicationMallocFailedHook
  .text.hot.vListInitialise
-                0x000022aa       0x1c FreeRTOS/list.o
-                0x000022aa                vListInitialise
+                0x000023bc       0x1c FreeRTOS/list.o
+                0x000023bc                vListInitialise
  .text.hot.vListInitialiseItem
-                0x000022c6        0x8 FreeRTOS/list.o
-                0x000022c6                vListInitialiseItem
+                0x000023d8        0x8 FreeRTOS/list.o
+                0x000023d8                vListInitialiseItem
  .text.hot.vListInsertEnd
-                0x000022ce       0x42 FreeRTOS/list.o
-                0x000022ce                vListInsertEnd
+                0x000023e0       0x42 FreeRTOS/list.o
+                0x000023e0                vListInsertEnd
  .text.hot.vListInsert
-                0x00002310       0x70 FreeRTOS/list.o
-                0x00002310                vListInsert
+                0x00002422       0x70 FreeRTOS/list.o
+                0x00002422                vListInsert
  .text.hot.uxListRemove
-                0x00002380       0x48 FreeRTOS/list.o
-                0x00002380                uxListRemove
+                0x00002492       0x48 FreeRTOS/list.o
+                0x00002492                uxListRemove
  .text.hot.pxPortInitialiseStack
-                0x000023c8       0xd8 FreeRTOS/port.o
-                0x000023c8                pxPortInitialiseStack
+                0x000024da       0xd8 FreeRTOS/port.o
+                0x000024da                pxPortInitialiseStack
  .text.hot.xPortStartScheduler
-                0x000024a0       0x72 FreeRTOS/port.o
-                0x000024a0                xPortStartScheduler
+                0x000025b2       0x72 FreeRTOS/port.o
+                0x000025b2                xPortStartScheduler
  .text.hot.vPortYield
-                0x00002512       0xb2 FreeRTOS/port.o
-                0x00002512                vPortYield
+                0x00002624       0xb2 FreeRTOS/port.o
+                0x00002624                vPortYield
  .text.hot.vPortYieldFromTick
-                0x000025c4       0xba FreeRTOS/port.o
-                0x000025c4                vPortYieldFromTick
+                0x000026d6       0xba FreeRTOS/port.o
+                0x000026d6                vPortYieldFromTick
  .text.hot.__vector_6
-                0x0000267e        0x6 FreeRTOS/port.o
-                0x0000267e                __vector_6
+                0x00002790        0x6 FreeRTOS/port.o
+                0x00002790                __vector_6
  .text.hot.prvIsQueueEmpty
-                0x00002684       0x16 FreeRTOS/queue.o
+                0x00002796       0x16 FreeRTOS/queue.o
  .text.hot.prvCopyDataToQueue
-                0x0000269a       0xaa FreeRTOS/queue.o
+                0x000027ac       0xaa FreeRTOS/queue.o
  .text.hot.prvCopyDataFromQueue
-                0x00002744       0x34 FreeRTOS/queue.o
+                0x00002856       0x34 FreeRTOS/queue.o
  .text.hot.prvUnlockQueue
-                0x00002778       0x7c FreeRTOS/queue.o
+                0x0000288a       0x7c FreeRTOS/queue.o
  .text.hot.xQueueGenericReset
-                0x000027f4       0x74 FreeRTOS/queue.o
-                0x000027f4                xQueueGenericReset
+                0x00002906       0x74 FreeRTOS/queue.o
+                0x00002906                xQueueGenericReset
  .text.hot.xQueueGenericCreate
-                0x00002868       0x64 FreeRTOS/queue.o
-                0x00002868                xQueueGenericCreate
+                0x0000297a       0x64 FreeRTOS/queue.o
+                0x0000297a                xQueueGenericCreate
  .text.hot.xQueueGenericSend
-                0x000028cc      0x12c FreeRTOS/queue.o
-                0x000028cc                xQueueGenericSend
+                0x000029de      0x12c FreeRTOS/queue.o
+                0x000029de                xQueueGenericSend
  .text.hot.xQueueGenericSendFromISR
-                0x000029f8       0x5e FreeRTOS/queue.o
-                0x000029f8                xQueueGenericSendFromISR
+                0x00002b0a       0x5e FreeRTOS/queue.o
+                0x00002b0a                xQueueGenericSendFromISR
  .text.hot.xQueueReceive
-                0x00002a56      0x124 FreeRTOS/queue.o
-                0x00002a56                xQueueReceive
+                0x00002b68      0x124 FreeRTOS/queue.o
+                0x00002b68                xQueueReceive
  .text.hot.vQueueWaitForMessageRestricted
-                0x00002b7a       0x38 FreeRTOS/queue.o
-                0x00002b7a                vQueueWaitForMessageRestricted
+                0x00002c8c       0x38 FreeRTOS/queue.o
+                0x00002c8c                vQueueWaitForMessageRestricted
  .text.prvResetNextTaskUnblockTime
-                0x00002bb2       0x36 FreeRTOS/task.o
+                0x00002cc4       0x36 FreeRTOS/task.o
  .text.hot.prvAddCurrentTaskToDelayedList
-                0x00002be8       0xce FreeRTOS/task.o
+                0x00002cfa       0xce FreeRTOS/task.o
  .text.prvIdleTask
-                0x00002cb6       0x5c FreeRTOS/task.o
+                0x00002dc8       0x5c FreeRTOS/task.o
  .text.hot.xTaskCreate
-                0x00002d12      0x20e FreeRTOS/task.o
-                0x00002d12                xTaskCreate
+                0x00002e24      0x20e FreeRTOS/task.o
+                0x00002e24                xTaskCreate
  .text.hot.vTaskStartScheduler
-                0x00002f20       0x5c FreeRTOS/task.o
-                0x00002f20                vTaskStartScheduler
+                0x00003032       0x5c FreeRTOS/task.o
+                0x00003032                vTaskStartScheduler
  .text.hot.vTaskSuspendAll
-                0x00002f7c        0xc FreeRTOS/task.o
-                0x00002f7c                vTaskSuspendAll
+                0x0000308e        0xc FreeRTOS/task.o
+                0x0000308e                vTaskSuspendAll
  .text.hot.xTaskGetTickCount
-                0x00002f88       0x14 FreeRTOS/task.o
-                0x00002f88                xTaskGetTickCount
+                0x0000309a       0x14 FreeRTOS/task.o
+                0x0000309a                xTaskGetTickCount
  .text.hot.xTaskIncrementTick
-                0x00002f9c      0x158 FreeRTOS/task.o
-                0x00002f9c                xTaskIncrementTick
+                0x000030ae      0x158 FreeRTOS/task.o
+                0x000030ae                xTaskIncrementTick
  .text.hot.xTaskResumeAll
-                0x000030f4       0xde FreeRTOS/task.o
-                0x000030f4                xTaskResumeAll
+                0x00003206       0xde FreeRTOS/task.o
+                0x00003206                xTaskResumeAll
  .text.hot.vTaskDelayUntil
-                0x000031d2       0x70 FreeRTOS/task.o
-                0x000031d2                vTaskDelayUntil
+                0x000032e4       0x70 FreeRTOS/task.o
+                0x000032e4                vTaskDelayUntil
  .text.hot.vTaskDelay
-                0x00003242       0x38 FreeRTOS/task.o
-                0x00003242                vTaskDelay
+                0x00003354       0x38 FreeRTOS/task.o
+                0x00003354                vTaskDelay
  .text.hot.vTaskSwitchContext
-                0x0000327a       0xbc FreeRTOS/task.o
-                0x0000327a                vTaskSwitchContext
+                0x0000338c       0xbc FreeRTOS/task.o
+                0x0000338c                vTaskSwitchContext
  .text.hot.vTaskPlaceOnEventList
-                0x00003336       0x24 FreeRTOS/task.o
-                0x00003336                vTaskPlaceOnEventList
+                0x00003448       0x24 FreeRTOS/task.o
+                0x00003448                vTaskPlaceOnEventList
  .text.hot.vTaskPlaceOnEventListRestricted
-                0x0000335a       0x40 FreeRTOS/task.o
-                0x0000335a                vTaskPlaceOnEventListRestricted
+                0x0000346c       0x40 FreeRTOS/task.o
+                0x0000346c                vTaskPlaceOnEventListRestricted
  .text.hot.xTaskRemoveFromEventList
-                0x0000339a       0x80 FreeRTOS/task.o
-                0x0000339a                xTaskRemoveFromEventList
+                0x000034ac       0x80 FreeRTOS/task.o
+                0x000034ac                xTaskRemoveFromEventList
  .text.hot.vTaskInternalSetTimeOutState
-                0x0000341a       0x16 FreeRTOS/task.o
-                0x0000341a                vTaskInternalSetTimeOutState
+                0x0000352c       0x16 FreeRTOS/task.o
+                0x0000352c                vTaskInternalSetTimeOutState
  .text.hot.xTaskCheckForTimeOut
-                0x00003430       0x6c FreeRTOS/task.o
-                0x00003430                xTaskCheckForTimeOut
+                0x00003542       0x6c FreeRTOS/task.o
+                0x00003542                xTaskCheckForTimeOut
  .text.hot.vTaskMissedYield
-                0x0000349c        0x8 FreeRTOS/task.o
-                0x0000349c                vTaskMissedYield
+                0x000035ae        0x8 FreeRTOS/task.o
+                0x000035ae                vTaskMissedYield
  .text.hot.xTaskGetSchedulerState
-                0x000034a4       0x1c FreeRTOS/task.o
-                0x000034a4                xTaskGetSchedulerState
+                0x000035b6       0x1c FreeRTOS/task.o
+                0x000035b6                xTaskGetSchedulerState
  .text.hot.xTaskPriorityDisinherit
-                0x000034c0       0x74 FreeRTOS/task.o
-                0x000034c0                xTaskPriorityDisinherit
+                0x000035d2       0x74 FreeRTOS/task.o
+                0x000035d2                xTaskPriorityDisinherit
  .text.hot.prvCheckForValidListAndQueue
-                0x00003534       0x52 FreeRTOS/time.o
+                0x00003646       0x52 FreeRTOS/time.o
  .text.hot.prvInsertTimerInActiveList
-                0x00003586       0x54 FreeRTOS/time.o
+                0x00003698       0x54 FreeRTOS/time.o
  .text.hot.xTimerCreateTimerTask
-                0x000035da       0x40 FreeRTOS/time.o
-                0x000035da                xTimerCreateTimerTask
+                0x000036ec       0x40 FreeRTOS/time.o
+                0x000036ec                xTimerCreateTimerTask
  .text.hot.xTimerGenericCommand
-                0x0000361a       0x7e FreeRTOS/time.o
-                0x0000361a                xTimerGenericCommand
+                0x0000372c       0x7e FreeRTOS/time.o
+                0x0000372c                xTimerGenericCommand
  .text.hot.prvSwitchTimerLists
-                0x00003698       0xa2 FreeRTOS/time.o
+                0x000037aa       0xa2 FreeRTOS/time.o
  .text.hot.prvTimerTask
-                0x0000373a      0x200 FreeRTOS/time.o
+                0x0000384c      0x200 FreeRTOS/time.o
  .text.hot.pvPortMalloc
-                0x0000393a       0x3e FreeRTOS/MemMang/heap_3.o
-                0x0000393a                pvPortMalloc
+                0x00003a4c       0x3e FreeRTOS/MemMang/heap_3.o
+                0x00003a4c                pvPortMalloc
  .text.hot.vPortFree
-                0x00003978       0x22 FreeRTOS/MemMang/heap_3.o
-                0x00003978                vPortFree
+                0x00003a8a       0x22 FreeRTOS/MemMang/heap_3.o
+                0x00003a8a                vPortFree
  .text.libgcc.div
-                0x0000399a       0x44 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_udivmodsi4.o)
-                0x0000399a                __udivmodsi4
- .text.libgcc   0x000039de        0xc c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_tablejump2.o)
-                0x000039de                __tablejump2__
+                0x00003aac       0x44 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_udivmodsi4.o)
+                0x00003aac                __udivmodsi4
+ .text.libgcc   0x00003af0        0xc c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_tablejump2.o)
+                0x00003af0                __tablejump2__
  .text.avr-libc
-                0x000039ea      0x25a c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(malloc.o)
-                0x000039ea                malloc
-                0x00003b14                free
+                0x00003afc      0x25a c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(malloc.o)
+                0x00003afc                malloc
+                0x00003c26                free
  .text.avr-libc
-                0x00003c44       0x12 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(memcpy.o)
-                0x00003c44                memcpy
+                0x00003d56       0x12 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(memcpy.o)
+                0x00003d56                memcpy
  .text.avr-libc
-                0x00003c56        0xe c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(memset.o)
-                0x00003c56                memset
+                0x00003d68        0xe c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(memset.o)
+                0x00003d68                memset
  .text.avr-libc
-                0x00003c64        0xe c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(strcpy.o)
-                0x00003c64                strcpy
+                0x00003d76        0xe c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(strcpy.o)
+                0x00003d76                strcpy
  .text.avr-libc
-                0x00003c72       0x46 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(sprintf.o)
-                0x00003c72                sprintf
+                0x00003d84       0x46 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(sprintf.o)
+                0x00003d84                sprintf
  .text.avr-libc
-                0x00003cb8      0x3a4 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
-                0x00003cb8                vfprintf
+                0x00003dca      0x3a4 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
+                0x00003dca                vfprintf
  .text.avr-libc
-                0x0000405c       0x16 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
-                0x0000405c                strnlen_P
+                0x0000416e       0x16 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
+                0x0000416e                strnlen_P
  .text.avr-libc
-                0x00004072       0x16 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(strnlen.o)
-                0x00004072                strnlen
+                0x00004184       0x16 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(strnlen.o)
+                0x00004184                strnlen
  .text.avr-libc
-                0x00004088       0x70 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(fputc.o)
-                0x00004088                fputc
+                0x0000419a       0x70 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(fputc.o)
+                0x0000419a                fputc
  .text.avr-libc
-                0x000040f8       0xbc c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
-                0x000040f8                __ultoa_invert
+                0x0000420a       0xbc c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
+                0x0000420a                __ultoa_invert
  .text.libgcc.prologue
-                0x000041b4       0x38 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_prologue.o)
-                0x000041b4                __prologue_saves__
+                0x000042c6       0x38 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_prologue.o)
+                0x000042c6                __prologue_saves__
  .text.libgcc.prologue
-                0x000041ec       0x36 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_epilogue.o)
-                0x000041ec                __epilogue_restores__
-                0x00004222                . = ALIGN (0x2)
+                0x000042fe       0x36 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_epilogue.o)
+                0x000042fe                __epilogue_restores__
+                0x00004334                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00004222        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
-                0x00004222                _exit
-                0x00004222                exit
+ .fini9         0x00004334        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
+                0x00004334                _exit
+                0x00004334                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -1044,11 +1038,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00004222        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
+ .fini0         0x00004334        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00004226                _etext = .
+                0x00004338                _etext = .
 
-.data           0x00800100      0x254 load address 0x00004226
+.data           0x00800100      0x2ce load address 0x00004338
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800100        0x6 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(malloc.o)
@@ -1057,178 +1051,181 @@ END GROUP
                 0x00800104                __malloc_margin
  *(.data*)
  .data.lcd_buffer2
-                0x00800106       0x11 main.o
+                0x00800106       0x11 torenair.o
                 0x00800106                lcd_buffer2
  .data.lcd_buffer1
-                0x00800117       0x11 main.o
+                0x00800117       0x11 torenair.o
                 0x00800117                lcd_buffer1
  .data.tank_height
-                0x00800128        0x2 main.o
+                0x00800128        0x2 torenair.o
                 0x00800128                tank_height
- .data.day      0x0080012a        0x1 main.o
-                0x0080012a                day
- .data.month    0x0080012b        0x1 main.o
-                0x0080012b                month
- .data.year     0x0080012c        0x4 main.o
-                0x0080012c                year
+ .data.rate     0x0080012a        0x2 torenair.o
+                0x0080012a                rate
+ .data.day      0x0080012c        0x1 torenair.o
+                0x0080012c                day
+ .data.month    0x0080012d        0x1 torenair.o
+                0x0080012d                month
+ .data.year     0x0080012e        0x4 torenair.o
+                0x0080012e                year
+ .data.task_time_serial_xfer
+                0x00800132        0x4 torenair.o
+                0x00800132                task_time_serial_xfer
  .data.task_time_debounce
-                0x00800130        0x4 main.o
-                0x00800130                task_time_debounce
+                0x00800136        0x4 torenair.o
+                0x00800136                task_time_debounce
  *(.rodata)
  *(.rodata*)
- .rodata.CSWTCH.12
-                0x00800134       0x10 keypad.o
+ .rodata.CSWTCH.11
+                0x0080013a       0x10 keypad.o
  .rodata.str1.1
-                0x00800144       0x13 main.o
+                0x0080014a      0x25f statemachine.o
  .rodata.str1.1
-                0x00800157      0x1f0 statemachine.o
+                0x008003a9       0x18 torenair.o
  .rodata.str1.1
-                0x00800347        0x5 FreeRTOS/task.o
+                0x008003c1        0x5 FreeRTOS/task.o
  .rodata.str1.1
-                0x0080034c        0x8 FreeRTOS/time.o
+                0x008003c6        0x8 FreeRTOS/time.o
  *(.gnu.linkonce.d*)
-                0x00800354                . = ALIGN (0x2)
-                0x00800354                _edata = .
-                0x00800354                PROVIDE (__data_end, .)
+                0x008003ce                . = ALIGN (0x2)
+                0x008003ce                _edata = .
+                0x008003ce                PROVIDE (__data_end, .)
 
-.bss            0x00800354      0x10d
-                0x00800354                PROVIDE (__bss_start, .)
+.bss            0x008003ce       0xfa
+                0x008003ce                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
  .bss.sonar_running
-                0x00800354        0x1 main.o
-                0x00800354                sonar_running
- .bss.sonar_up  0x00800355        0x1 main.o
-                0x00800355                sonar_up
+                0x008003ce        0x1 torenair.o
+                0x008003ce                sonar_running
+ .bss.sonar_up  0x008003cf        0x1 torenair.o
+                0x008003cf                sonar_up
  .bss.sonar_timerCounter
-                0x00800356        0x4 main.o
-                0x00800356                sonar_timerCounter
+                0x008003d0        0x4 torenair.o
+                0x008003d0                sonar_timerCounter
  .bss.sonar_result
-                0x0080035a        0x2 main.o
-                0x0080035a                sonar_result
+                0x008003d4        0x2 torenair.o
+                0x008003d4                sonar_result
  .bss.relay_mode
-                0x0080035c        0x1 main.o
-                0x0080035c                relay_mode
- .bss.relay     0x0080035d        0x1 main.o
-                0x0080035d                relay
- .bss.rate      0x0080035e        0x2 main.o
-                0x0080035e                rate
- .bss.second    0x00800360        0x1 main.o
-                0x00800360                second
- .bss.minute    0x00800361        0x1 main.o
-                0x00800361                minute
- .bss.hour      0x00800362        0x1 main.o
-                0x00800362                hour
+                0x008003d6        0x1 torenair.o
+                0x008003d6                relay_mode
+ .bss.relay     0x008003d7        0x1 torenair.o
+                0x008003d7                relay
+ .bss.second    0x008003d8        0x1 torenair.o
+                0x008003d8                second
+ .bss.minute    0x008003d9        0x1 torenair.o
+                0x008003d9                minute
+ .bss.hour      0x008003da        0x1 torenair.o
+                0x008003da                hour
+ .bss.xfer_flag
+                0x008003db        0x1 torenair.o
+                0x008003db                xfer_flag
  .bss.sys_state
-                0x00800363        0x1 main.o
-                0x00800363                sys_state
- .bss.dataport  0x00800364        0x1 lcdpcf8574/lcdpcf8574.o
-                0x00800364                dataport
+                0x008003dc        0x1 torenair.o
+                0x008003dc                sys_state
+ .bss.dataport  0x008003dd        0x1 lcdpcf8574/lcdpcf8574.o
+                0x008003dd                dataport
  .bss.UART_LastRxError
-                0x00800365        0x1 uart/uart.o
+                0x008003de        0x1 uart/uart.o
  .bss.UART_RxTail
-                0x00800366        0x1 uart/uart.o
+                0x008003df        0x1 uart/uart.o
  .bss.UART_RxHead
-                0x00800367        0x1 uart/uart.o
+                0x008003e0        0x1 uart/uart.o
  .bss.UART_TxTail
-                0x00800368        0x1 uart/uart.o
+                0x008003e1        0x1 uart/uart.o
  .bss.UART_TxHead
-                0x00800369        0x1 uart/uart.o
+                0x008003e2        0x1 uart/uart.o
  .bss.UART_RxBuf
-                0x0080036a       0x20 uart/uart.o
+                0x008003e3       0x20 uart/uart.o
  .bss.UART_TxBuf
-                0x0080038a       0x20 uart/uart.o
+                0x00800403       0x20 uart/uart.o
  .bss.uxSchedulerSuspended
-                0x008003aa        0x1 FreeRTOS/task.o
+                0x00800423        0x1 FreeRTOS/task.o
  .bss.xIdleTaskHandle
-                0x008003ab        0x2 FreeRTOS/task.o
+                0x00800424        0x2 FreeRTOS/task.o
  .bss.xNextTaskUnblockTime
-                0x008003ad        0x2 FreeRTOS/task.o
+                0x00800426        0x2 FreeRTOS/task.o
  .bss.uxTaskNumber
-                0x008003af        0x1 FreeRTOS/task.o
+                0x00800428        0x1 FreeRTOS/task.o
  .bss.xNumOfOverflows
-                0x008003b0        0x1 FreeRTOS/task.o
+                0x00800429        0x1 FreeRTOS/task.o
  .bss.xYieldPending
-                0x008003b1        0x1 FreeRTOS/task.o
+                0x0080042a        0x1 FreeRTOS/task.o
  .bss.uxPendedTicks
-                0x008003b2        0x1 FreeRTOS/task.o
+                0x0080042b        0x1 FreeRTOS/task.o
  .bss.xSchedulerRunning
-                0x008003b3        0x1 FreeRTOS/task.o
+                0x0080042c        0x1 FreeRTOS/task.o
  .bss.uxTopReadyPriority
-                0x008003b4        0x1 FreeRTOS/task.o
+                0x0080042d        0x1 FreeRTOS/task.o
  .bss.xTickCount
-                0x008003b5        0x2 FreeRTOS/task.o
+                0x0080042e        0x2 FreeRTOS/task.o
  .bss.uxCurrentNumberOfTasks
-                0x008003b7        0x1 FreeRTOS/task.o
+                0x00800430        0x1 FreeRTOS/task.o
  .bss.xSuspendedTaskList
-                0x008003b8        0x9 FreeRTOS/task.o
+                0x00800431        0x9 FreeRTOS/task.o
  .bss.uxDeletedTasksWaitingCleanUp
-                0x008003c1        0x1 FreeRTOS/task.o
+                0x0080043a        0x1 FreeRTOS/task.o
  .bss.xTasksWaitingTermination
-                0x008003c2        0x9 FreeRTOS/task.o
+                0x0080043b        0x9 FreeRTOS/task.o
  .bss.xPendingReadyList
-                0x008003cb        0x9 FreeRTOS/task.o
+                0x00800444        0x9 FreeRTOS/task.o
  .bss.pxOverflowDelayedTaskList
-                0x008003d4        0x2 FreeRTOS/task.o
+                0x0080044d        0x2 FreeRTOS/task.o
  .bss.pxDelayedTaskList
-                0x008003d6        0x2 FreeRTOS/task.o
+                0x0080044f        0x2 FreeRTOS/task.o
  .bss.xDelayedTaskList2
-                0x008003d8        0x9 FreeRTOS/task.o
+                0x00800451        0x9 FreeRTOS/task.o
  .bss.xDelayedTaskList1
-                0x008003e1        0x9 FreeRTOS/task.o
+                0x0080045a        0x9 FreeRTOS/task.o
  .bss.pxReadyTasksLists
-                0x008003ea       0x24 FreeRTOS/task.o
+                0x00800463       0x24 FreeRTOS/task.o
  .bss.pxCurrentTCB
-                0x0080040e        0x2 FreeRTOS/task.o
-                0x0080040e                pxCurrentTCB
+                0x00800487        0x2 FreeRTOS/task.o
+                0x00800487                pxCurrentTCB
  .bss.xLastTime.2253
-                0x00800410        0x2 FreeRTOS/time.o
+                0x00800489        0x2 FreeRTOS/time.o
  .bss.xTimerTaskHandle
-                0x00800412        0x2 FreeRTOS/time.o
+                0x0080048b        0x2 FreeRTOS/time.o
  .bss.xTimerQueue
-                0x00800414        0x2 FreeRTOS/time.o
+                0x0080048d        0x2 FreeRTOS/time.o
  .bss.pxOverflowTimerList
-                0x00800416        0x2 FreeRTOS/time.o
+                0x0080048f        0x2 FreeRTOS/time.o
  .bss.pxCurrentTimerList
-                0x00800418        0x2 FreeRTOS/time.o
+                0x00800491        0x2 FreeRTOS/time.o
  .bss.xActiveTimerList2
-                0x0080041a        0x9 FreeRTOS/time.o
+                0x00800493        0x9 FreeRTOS/time.o
  .bss.xActiveTimerList1
-                0x00800423        0x9 FreeRTOS/time.o
+                0x0080049c        0x9 FreeRTOS/time.o
  *(COMMON)
- COMMON         0x0080042c       0x12 keypad.o
-                0x0080042c                user_input
-                0x0080043d                edit_state
- COMMON         0x0080043e        0x9 main.o
-                0x0080043e                keynumber
-                0x0080043f                butnum
-                0x00800440                last_butnum
-                0x00800441                button_flag
-                0x00800442                button_state
-                0x00800443                systime_ms
-                0x00800445                last_keynumber
-                0x00800446                last_keynumber_temp
- COMMON         0x00800447        0xe statemachine.o
-                0x00800447                water_height
-                0x00800449                water_height_max
-                0x0080044b                input
-                0x00800453                count
-                0x00800454                relay_set_manual
- COMMON         0x00800455        0x8 lcdpcf8574/lcdpcf8574.o
-                0x00800455                pcf8574_pinstatus
- COMMON         0x0080045d        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(malloc.o)
-                0x0080045d                __brkval
-                0x0080045f                __flp
-                0x00800461                PROVIDE (__bss_end, .)
-                0x00004226                __data_load_start = LOADADDR (.data)
-                0x0000447a                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x008004a5        0xc statemachine.o
+                0x008004a5                water_height_max
+                0x008004a7                input
+                0x008004af                count
+                0x008004b0                relay_set_manual
+ COMMON         0x008004b1        0xb torenair.o
+                0x008004b1                keynumber
+                0x008004b2                butnum
+                0x008004b3                water_height
+                0x008004b5                last_butnum
+                0x008004b6                button_flag
+                0x008004b7                button_state
+                0x008004b8                systime_ms
+                0x008004ba                last_keynumber
+                0x008004bb                last_keynumber_temp
+ COMMON         0x008004bc        0x8 lcdpcf8574/lcdpcf8574.o
+                0x008004bc                pcf8574_pinstatus
+ COMMON         0x008004c4        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5\libc.a(malloc.o)
+                0x008004c4                __brkval
+                0x008004c6                __flp
+                0x008004c8                PROVIDE (__bss_end, .)
+                0x00004338                __data_load_start = LOADADDR (.data)
+                0x00004606                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800461        0x0
+.noinit         0x008004c8        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x00800461                _end = .
-                0x00800461                PROVIDE (__heap_start, .)
+                0x008004c8                _end = .
+                0x008004c8                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
  *(.eeprom*)
@@ -1272,8 +1269,6 @@ END GROUP
  .comment       0x00000000       0x30 display.o
                                  0x31 (size before relaxing)
  .comment       0x00000030       0x31 keypad.o
- .comment       0x00000030       0x31 main.o
- .comment       0x00000030       0x31 relay.o
  .comment       0x00000030       0x31 statemachine.o
  .comment       0x00000030       0x31 torenair.o
  .comment       0x00000030       0x31 i2chw/twimaster.o
@@ -1313,185 +1308,168 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0x6d8
+.debug_aranges  0x00000000      0x6a8
  *(.debug_aranges)
  .debug_aranges
                 0x00000000       0x40 display.o
  .debug_aranges
                 0x00000040       0x50 keypad.o
  .debug_aranges
-                0x00000090       0x58 main.o
+                0x00000090       0x30 statemachine.o
  .debug_aranges
-                0x000000e8       0x20 relay.o
+                0x000000c0       0x70 torenair.o
  .debug_aranges
-                0x00000108       0x30 statemachine.o
+                0x00000130       0x58 i2chw/twimaster.o
  .debug_aranges
-                0x00000138       0x28 torenair.o
+                0x00000188       0x98 lcdpcf8574/lcdpcf8574.o
  .debug_aranges
-                0x00000160       0x58 i2chw/twimaster.o
+                0x00000220       0x68 pcf8574/pcf8574.o
  .debug_aranges
-                0x000001b8       0x98 lcdpcf8574/lcdpcf8574.o
+                0x00000288       0x50 uart/uart.o
  .debug_aranges
-                0x00000250       0x68 pcf8574/pcf8574.o
+                0x000002d8       0x30 FreeRTOS/hooks.o
  .debug_aranges
-                0x000002b8       0x50 uart/uart.o
+                0x00000308       0x40 FreeRTOS/list.o
  .debug_aranges
-                0x00000308       0x30 FreeRTOS/hooks.o
+                0x00000348       0x48 FreeRTOS/port.o
  .debug_aranges
-                0x00000338       0x40 FreeRTOS/list.o
+                0x00000390       0xe0 FreeRTOS/queue.o
  .debug_aranges
-                0x00000378       0x48 FreeRTOS/port.o
+                0x00000470      0x188 FreeRTOS/task.o
  .debug_aranges
-                0x000003c0       0xe0 FreeRTOS/queue.o
+                0x000005f8       0x88 FreeRTOS/time.o
  .debug_aranges
-                0x000004a0      0x188 FreeRTOS/task.o
- .debug_aranges
-                0x00000628       0x88 FreeRTOS/time.o
- .debug_aranges
-                0x000006b0       0x28 FreeRTOS/MemMang/heap_3.o
+                0x00000680       0x28 FreeRTOS/MemMang/heap_3.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x7db2
+.debug_info     0x00000000     0x7d34
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x5f4 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5/crtatmega328p.o
  .debug_info    0x000005f4      0x211 display.o
- .debug_info    0x00000805      0x3d6 keypad.o
- .debug_info    0x00000bdb      0x7a4 main.o
- .debug_info    0x0000137f       0xa2 relay.o
- .debug_info    0x00001421      0x292 statemachine.o
- .debug_info    0x000016b3      0x153 torenair.o
- .debug_info    0x00001806      0x1f7 i2chw/twimaster.o
- .debug_info    0x000019fd      0x85e lcdpcf8574/lcdpcf8574.o
- .debug_info    0x0000225b      0x558 pcf8574/pcf8574.o
- .debug_info    0x000027b3      0x2f8 uart/uart.o
- .debug_info    0x00002aab      0x1d9 FreeRTOS/hooks.o
- .debug_info    0x00002c84      0x2cc FreeRTOS/list.o
- .debug_info    0x00002f50      0x249 FreeRTOS/port.o
- .debug_info    0x00003199     0x182a FreeRTOS/queue.o
- .debug_info    0x000049c3     0x2148 FreeRTOS/task.o
- .debug_info    0x00006b0b     0x1103 FreeRTOS/time.o
- .debug_info    0x00007c0e      0x1a4 FreeRTOS/MemMang/heap_3.o
+ .debug_info    0x00000805      0x388 keypad.o
+ .debug_info    0x00000b8d      0x28d statemachine.o
+ .debug_info    0x00000e1a      0x96e torenair.o
+ .debug_info    0x00001788      0x1f7 i2chw/twimaster.o
+ .debug_info    0x0000197f      0x85e lcdpcf8574/lcdpcf8574.o
+ .debug_info    0x000021dd      0x558 pcf8574/pcf8574.o
+ .debug_info    0x00002735      0x2f8 uart/uart.o
+ .debug_info    0x00002a2d      0x1d9 FreeRTOS/hooks.o
+ .debug_info    0x00002c06      0x2cc FreeRTOS/list.o
+ .debug_info    0x00002ed2      0x249 FreeRTOS/port.o
+ .debug_info    0x0000311b     0x182a FreeRTOS/queue.o
+ .debug_info    0x00004945     0x2148 FreeRTOS/task.o
+ .debug_info    0x00006a8d     0x1103 FreeRTOS/time.o
+ .debug_info    0x00007b90      0x1a4 FreeRTOS/MemMang/heap_3.o
 
-.debug_abbrev   0x00000000     0x239b
+.debug_abbrev   0x00000000     0x2274
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x5a2 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5/crtatmega328p.o
  .debug_abbrev  0x000005a2      0x124 display.o
- .debug_abbrev  0x000006c6      0x1a7 keypad.o
- .debug_abbrev  0x0000086d      0x2af main.o
- .debug_abbrev  0x00000b1c       0x72 relay.o
- .debug_abbrev  0x00000b8e       0xf3 statemachine.o
- .debug_abbrev  0x00000c81       0xe0 torenair.o
- .debug_abbrev  0x00000d61      0x14d i2chw/twimaster.o
- .debug_abbrev  0x00000eae      0x2c5 lcdpcf8574/lcdpcf8574.o
- .debug_abbrev  0x00001173      0x1f0 pcf8574/pcf8574.o
- .debug_abbrev  0x00001363      0x13c uart/uart.o
- .debug_abbrev  0x0000149f       0xf0 FreeRTOS/hooks.o
- .debug_abbrev  0x0000158f       0xff FreeRTOS/list.o
- .debug_abbrev  0x0000168e      0x14b FreeRTOS/port.o
- .debug_abbrev  0x000017d9      0x36a FreeRTOS/queue.o
- .debug_abbrev  0x00001b43      0x3dc FreeRTOS/task.o
- .debug_abbrev  0x00001f1f      0x33a FreeRTOS/time.o
- .debug_abbrev  0x00002259      0x142 FreeRTOS/MemMang/heap_3.o
+ .debug_abbrev  0x000006c6      0x184 keypad.o
+ .debug_abbrev  0x0000084a       0xf3 statemachine.o
+ .debug_abbrev  0x0000093d      0x2fd torenair.o
+ .debug_abbrev  0x00000c3a      0x14d i2chw/twimaster.o
+ .debug_abbrev  0x00000d87      0x2c5 lcdpcf8574/lcdpcf8574.o
+ .debug_abbrev  0x0000104c      0x1f0 pcf8574/pcf8574.o
+ .debug_abbrev  0x0000123c      0x13c uart/uart.o
+ .debug_abbrev  0x00001378       0xf0 FreeRTOS/hooks.o
+ .debug_abbrev  0x00001468       0xff FreeRTOS/list.o
+ .debug_abbrev  0x00001567      0x14b FreeRTOS/port.o
+ .debug_abbrev  0x000016b2      0x36a FreeRTOS/queue.o
+ .debug_abbrev  0x00001a1c      0x3dc FreeRTOS/task.o
+ .debug_abbrev  0x00001df8      0x33a FreeRTOS/time.o
+ .debug_abbrev  0x00002132      0x142 FreeRTOS/MemMang/heap_3.o
 
-.debug_line     0x00000000     0x46c9
+.debug_line     0x00000000     0x4631
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000       0x1a c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5/crtatmega328p.o
  .debug_line    0x0000001a       0xff display.o
- .debug_line    0x00000119      0x320 keypad.o
- .debug_line    0x00000439      0x482 main.o
- .debug_line    0x000008bb       0x76 relay.o
- .debug_line    0x00000931      0x80f statemachine.o
- .debug_line    0x00001140      0x103 torenair.o
- .debug_line    0x00001243      0x238 i2chw/twimaster.o
- .debug_line    0x0000147b      0x4e7 lcdpcf8574/lcdpcf8574.o
- .debug_line    0x00001962      0x344 pcf8574/pcf8574.o
- .debug_line    0x00001ca6      0x1dd uart/uart.o
- .debug_line    0x00001e83      0x16d FreeRTOS/hooks.o
- .debug_line    0x00001ff0      0x1b3 FreeRTOS/list.o
- .debug_line    0x000021a3      0x289 FreeRTOS/port.o
- .debug_line    0x0000242c      0xad7 FreeRTOS/queue.o
- .debug_line    0x00002f03     0x11c6 FreeRTOS/task.o
- .debug_line    0x000040c9      0x4c7 FreeRTOS/time.o
- .debug_line    0x00004590      0x139 FreeRTOS/MemMang/heap_3.o
+ .debug_line    0x00000119      0x303 keypad.o
+ .debug_line    0x0000041c      0x80f statemachine.o
+ .debug_line    0x00000c2b      0x580 torenair.o
+ .debug_line    0x000011ab      0x238 i2chw/twimaster.o
+ .debug_line    0x000013e3      0x4e7 lcdpcf8574/lcdpcf8574.o
+ .debug_line    0x000018ca      0x344 pcf8574/pcf8574.o
+ .debug_line    0x00001c0e      0x1dd uart/uart.o
+ .debug_line    0x00001deb      0x16d FreeRTOS/hooks.o
+ .debug_line    0x00001f58      0x1b3 FreeRTOS/list.o
+ .debug_line    0x0000210b      0x289 FreeRTOS/port.o
+ .debug_line    0x00002394      0xad7 FreeRTOS/queue.o
+ .debug_line    0x00002e6b     0x11c6 FreeRTOS/task.o
+ .debug_line    0x00004031      0x4c7 FreeRTOS/time.o
+ .debug_line    0x000044f8      0x139 FreeRTOS/MemMang/heap_3.o
 
-.debug_frame    0x00000000     0x1a10
+.debug_frame    0x00000000     0x19e8
  *(.debug_frame)
  .debug_frame   0x00000000       0x74 display.o
  .debug_frame   0x00000074       0xa8 keypad.o
- .debug_frame   0x0000011c      0x1ac main.o
- .debug_frame   0x000002c8       0x24 relay.o
- .debug_frame   0x000002ec      0x6b8 statemachine.o
- .debug_frame   0x000009a4       0x34 torenair.o
- .debug_frame   0x000009d8       0x94 i2chw/twimaster.o
- .debug_frame   0x00000a6c      0x194 lcdpcf8574/lcdpcf8574.o
- .debug_frame   0x00000c00       0xe8 pcf8574/pcf8574.o
- .debug_frame   0x00000ce8       0xe0 uart/uart.o
- .debug_frame   0x00000dc8       0x44 FreeRTOS/hooks.o
- .debug_frame   0x00000e0c       0x90 FreeRTOS/list.o
- .debug_frame   0x00000e9c       0x74 FreeRTOS/port.o
- .debug_frame   0x00000f10      0x378 FreeRTOS/queue.o
- .debug_frame   0x00001288      0x5a4 FreeRTOS/task.o
- .debug_frame   0x0000182c      0x188 FreeRTOS/time.o
- .debug_frame   0x000019b4       0x5c FreeRTOS/MemMang/heap_3.o
+ .debug_frame   0x0000011c      0x6b8 statemachine.o
+ .debug_frame   0x000007d4      0x1dc torenair.o
+ .debug_frame   0x000009b0       0x94 i2chw/twimaster.o
+ .debug_frame   0x00000a44      0x194 lcdpcf8574/lcdpcf8574.o
+ .debug_frame   0x00000bd8       0xe8 pcf8574/pcf8574.o
+ .debug_frame   0x00000cc0       0xe0 uart/uart.o
+ .debug_frame   0x00000da0       0x44 FreeRTOS/hooks.o
+ .debug_frame   0x00000de4       0x90 FreeRTOS/list.o
+ .debug_frame   0x00000e74       0x74 FreeRTOS/port.o
+ .debug_frame   0x00000ee8      0x378 FreeRTOS/queue.o
+ .debug_frame   0x00001260      0x5a4 FreeRTOS/task.o
+ .debug_frame   0x00001804      0x188 FreeRTOS/time.o
+ .debug_frame   0x0000198c       0x5c FreeRTOS/MemMang/heap_3.o
 
-.debug_str      0x00000000     0x2049
+.debug_str      0x00000000     0x2064
  *(.debug_str)
  .debug_str     0x00000000      0x208 c:/winavr-20100110/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr5/crtatmega328p.o
  .debug_str     0x00000208      0x19d display.o
                                 0x1d6 (size before relaxing)
- .debug_str     0x000003a5      0x11f keypad.o
-                                0x2a7 (size before relaxing)
- .debug_str     0x000004c4      0x1d4 main.o
-                                0x464 (size before relaxing)
- .debug_str     0x00000698        0x8 relay.o
-                                0x162 (size before relaxing)
- .debug_str     0x000006a0       0x5f statemachine.o
+ .debug_str     0x000003a5      0x109 keypad.o
+                                0x27b (size before relaxing)
+ .debug_str     0x000004ae       0xab statemachine.o
                                 0x274 (size before relaxing)
- .debug_str     0x000006ff       0x40 torenair.o
-                                0x1a9 (size before relaxing)
- .debug_str     0x0000073f       0x7a i2chw/twimaster.o
+ .debug_str     0x00000559      0x20b torenair.o
+                                0x4fc (size before relaxing)
+ .debug_str     0x00000764       0x7a i2chw/twimaster.o
                                 0x1c9 (size before relaxing)
- .debug_str     0x000007b9      0x15e lcdpcf8574/lcdpcf8574.o
+ .debug_str     0x000007de      0x15e lcdpcf8574/lcdpcf8574.o
                                 0x30a (size before relaxing)
- .debug_str     0x00000917       0x95 pcf8574/pcf8574.o
+ .debug_str     0x0000093c       0x95 pcf8574/pcf8574.o
                                 0x2e8 (size before relaxing)
- .debug_str     0x000009ac       0xca uart/uart.o
+ .debug_str     0x000009d1       0xc0 uart/uart.o
                                 0x256 (size before relaxing)
- .debug_str     0x00000a76       0x5a FreeRTOS/hooks.o
+ .debug_str     0x00000a91       0x5a FreeRTOS/hooks.o
                                 0x233 (size before relaxing)
- .debug_str     0x00000ad0      0x12d FreeRTOS/list.o
+ .debug_str     0x00000aeb      0x12d FreeRTOS/list.o
                                 0x2a3 (size before relaxing)
- .debug_str     0x00000bfd       0xf1 FreeRTOS/port.o
+ .debug_str     0x00000c18       0xf1 FreeRTOS/port.o
                                 0x279 (size before relaxing)
- .debug_str     0x00000cee      0x673 FreeRTOS/queue.o
+ .debug_str     0x00000d09      0x673 FreeRTOS/queue.o
                                 0x8ef (size before relaxing)
- .debug_str     0x00001361      0x8b3 FreeRTOS/task.o
+ .debug_str     0x0000137c      0x8b3 FreeRTOS/task.o
                                 0xe74 (size before relaxing)
- .debug_str     0x00001c14      0x403 FreeRTOS/time.o
+ .debug_str     0x00001c2f      0x403 FreeRTOS/time.o
                                 0x7f0 (size before relaxing)
- .debug_str     0x00002017       0x32 FreeRTOS/MemMang/heap_3.o
+ .debug_str     0x00002032       0x32 FreeRTOS/MemMang/heap_3.o
                                 0x1f0 (size before relaxing)
 
-.debug_loc      0x00000000     0x8529
+.debug_loc      0x00000000     0x8514
  *(.debug_loc)
  .debug_loc     0x00000000       0xb6 display.o
  .debug_loc     0x000000b6      0x2c6 keypad.o
- .debug_loc     0x0000037c      0x4a1 main.o
- .debug_loc     0x0000081d       0x28 relay.o
- .debug_loc     0x00000845     0x1c20 statemachine.o
- .debug_loc     0x00002465      0x120 i2chw/twimaster.o
- .debug_loc     0x00002585      0x674 lcdpcf8574/lcdpcf8574.o
- .debug_loc     0x00002bf9      0x63d pcf8574/pcf8574.o
- .debug_loc     0x00003236      0x32d uart/uart.o
- .debug_loc     0x00003563       0x26 FreeRTOS/hooks.o
- .debug_loc     0x00003589      0x1d7 FreeRTOS/list.o
- .debug_loc     0x00003760      0x274 FreeRTOS/port.o
- .debug_loc     0x000039d4     0x1a9f FreeRTOS/queue.o
- .debug_loc     0x00005473     0x24ea FreeRTOS/task.o
- .debug_loc     0x0000795d      0xaa7 FreeRTOS/time.o
- .debug_loc     0x00008404      0x125 FreeRTOS/MemMang/heap_3.o
+ .debug_loc     0x0000037c     0x1c20 statemachine.o
+ .debug_loc     0x00001f9c      0x4b4 torenair.o
+ .debug_loc     0x00002450      0x120 i2chw/twimaster.o
+ .debug_loc     0x00002570      0x674 lcdpcf8574/lcdpcf8574.o
+ .debug_loc     0x00002be4      0x63d pcf8574/pcf8574.o
+ .debug_loc     0x00003221      0x32d uart/uart.o
+ .debug_loc     0x0000354e       0x26 FreeRTOS/hooks.o
+ .debug_loc     0x00003574      0x1d7 FreeRTOS/list.o
+ .debug_loc     0x0000374b      0x274 FreeRTOS/port.o
+ .debug_loc     0x000039bf     0x1a9f FreeRTOS/queue.o
+ .debug_loc     0x0000545e     0x24ea FreeRTOS/task.o
+ .debug_loc     0x00007948      0xaa7 FreeRTOS/time.o
+ .debug_loc     0x000083ef      0x125 FreeRTOS/MemMang/heap_3.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -1511,25 +1489,23 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000      0x658
+.debug_ranges   0x00000000      0x648
  *(.debug_ranges)
  .debug_ranges  0x00000000       0x30 display.o
  .debug_ranges  0x00000030       0x40 keypad.o
- .debug_ranges  0x00000070       0x48 main.o
- .debug_ranges  0x000000b8       0x10 relay.o
- .debug_ranges  0x000000c8       0x20 statemachine.o
- .debug_ranges  0x000000e8       0x18 torenair.o
- .debug_ranges  0x00000100       0x48 i2chw/twimaster.o
- .debug_ranges  0x00000148       0xa0 lcdpcf8574/lcdpcf8574.o
- .debug_ranges  0x000001e8       0x58 pcf8574/pcf8574.o
- .debug_ranges  0x00000240       0x40 uart/uart.o
- .debug_ranges  0x00000280       0x20 FreeRTOS/hooks.o
- .debug_ranges  0x000002a0       0x30 FreeRTOS/list.o
- .debug_ranges  0x000002d0       0x38 FreeRTOS/port.o
- .debug_ranges  0x00000308       0xe8 FreeRTOS/queue.o
- .debug_ranges  0x000003f0      0x1d8 FreeRTOS/task.o
- .debug_ranges  0x000005c8       0x78 FreeRTOS/time.o
- .debug_ranges  0x00000640       0x18 FreeRTOS/MemMang/heap_3.o
+ .debug_ranges  0x00000070       0x20 statemachine.o
+ .debug_ranges  0x00000090       0x60 torenair.o
+ .debug_ranges  0x000000f0       0x48 i2chw/twimaster.o
+ .debug_ranges  0x00000138       0xa0 lcdpcf8574/lcdpcf8574.o
+ .debug_ranges  0x000001d8       0x58 pcf8574/pcf8574.o
+ .debug_ranges  0x00000230       0x40 uart/uart.o
+ .debug_ranges  0x00000270       0x20 FreeRTOS/hooks.o
+ .debug_ranges  0x00000290       0x30 FreeRTOS/list.o
+ .debug_ranges  0x000002c0       0x38 FreeRTOS/port.o
+ .debug_ranges  0x000002f8       0xe8 FreeRTOS/queue.o
+ .debug_ranges  0x000003e0      0x1d8 FreeRTOS/task.o
+ .debug_ranges  0x000005b8       0x78 FreeRTOS/time.o
+ .debug_ranges  0x00000630       0x18 FreeRTOS/MemMang/heap_3.o
 
 .debug_macro
  *(.debug_macro)
