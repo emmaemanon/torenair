@@ -119,7 +119,6 @@ int main (void) {
 
 static void TaskMain(void *pvParameters) {
     (void) pvParameters;
-	char uart_buf[5];
 	
     TickType_t xLastWakeTime;
 	xLastWakeTime = xTaskGetTickCount();
@@ -148,14 +147,6 @@ static void TaskMain(void *pvParameters) {
 		display_msg();
 		
 		
-		if (task_time_serial_xfer == 0) {
-			// if (xfer_flag == XFER_RDY) {
-				sprintf(uart_buf, "%u\n\r", (unsigned)water_height);
-				uart_puts(uart_buf);
-				task_time_serial_xfer = rate * TASK_PERIOD_SERIAL_XFER_MS;
-				xfer_flag = XFER_NODATA;
-			// }
-		}
 		
 		
 		set_relay(relay);
@@ -165,6 +156,8 @@ static void TaskMain(void *pvParameters) {
 
 void TaskSonar(void *pvParameters) {
     (void) pvParameters;
+	char uart_buf[5];
+	
     TickType_t xLastWakeTime;
 	xLastWakeTime = xTaskGetTickCount();
 	
@@ -181,6 +174,16 @@ void TaskSonar(void *pvParameters) {
 			_delay_us(10);
 			TRIG_PORT &= ~(1 << TRIG_PIN); // clear 
 		}
+		
+		if (task_time_serial_xfer == 0) {
+			// if (xfer_flag == XFER_RDY) {
+				sprintf(uart_buf, "%u\n\r", (unsigned)water_height);
+				uart_puts(uart_buf);
+				task_time_serial_xfer = rate * TASK_PERIOD_SERIAL_XFER_MS;
+				xfer_flag = XFER_NODATA;
+			// }
+		}
+		
 		vTaskDelayUntil( &xLastWakeTime, ( 200 / portTICK_PERIOD_MS ));
     }
 }
